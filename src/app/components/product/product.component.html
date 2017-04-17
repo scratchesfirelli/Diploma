@@ -1,0 +1,34 @@
+<div class="container" *ngIf='product'>
+    <p>{{product | json}}</p>
+    <a class="btn btn-default" [routerLink]="['/product']">Back</a>
+    <div class="page-header">
+        <h1 class="text-center">{{product.Title}} <small *ngIf='product.Type' class="label label-default">{{product.Type}}</small></h1>
+    </div>
+    <div class="container">
+        <div class="col-md-6">
+            <img src="#" />
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <td><b>Price</b></td>
+                    <td>{{product.Price | currency: 'USD':true:'1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Date</b></td>
+                    <td>{{product.CreateDate | date }}</td>
+                </tr>
+                <tr *ngIf='product.Weight'>
+                    <td><b>Weight (kg) </b></td>
+                    <td>{{product.Weight}}</td>
+                </tr>
+                <tr *ngIf='product.Length && product.Width && product.Height'>
+                    <td><b>Dimensions (m)</b></td>
+                    <td>{{product.Length}} &times; {{product.Weight}} &times; {{product.Height}}</td>
+                </tr>
+            </table>
+            <h2></h2>
+        </div>
+    </div>
+    <h3 *ngIf='product.Description'>{{product.Description}}</h3>
+</div>
