@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace OrderManagementSystem.Models
             : base(options)
         { }
     public DbSet<Product> Products { get; set; }
+    public DbSet<ProductMaterial> ProductMaterials { get; set; }
+    public DbSet<ProductType> ProductTypes { get; set; }
   }
 }

@@ -1,11 +1,12 @@
 export class Product {
-    Id?: Number;
+    Id?: String;
     Title: String;
     Description?: String;
     CreateDate?: Date;
     Price: Number;
     Rating?: Number;
-    Type: String;
+    ProductTypeId: String;
+    ProductMaterialId?: String;
     Weight?: Number;
     Width?: Number;
     Height?: Number;

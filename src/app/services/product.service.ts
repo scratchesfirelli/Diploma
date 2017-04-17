@@ -1,3 +1,5 @@
+import { ProductMaterial } from './../models/productMaterial';
+import { ProductType } from './../models/productType';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Observable";
@@ -23,29 +25,23 @@ export class ProductService {
         return this.http.get(url)
             .map(res => res.json());
     }
-    getTypes(type: String): Observable<String> {
-        var url = this.baseUrl+`/getTypes/${type}`;
+    getProductTypes(): Observable<ProductType> {
+        var url = this.baseUrl+`/getProductTypes`;
         return this.http.get(url)
             .map(res => res.json());
             //.catch(error => {console.log(error); Observable.throw(error.json().error || "Server error")});
     }
 
+    getProductMaterials(): Observable<ProductMaterial> {
+        var url = this.baseUrl+`/getProductMaterials`;
+        return this.http.get(url)
+            .map(res => res.json());
+    }
+
     addProduct(product: Product) {
         var url = this.baseUrl+`/create`;
-/*        const prod: Product = {
-            Id: null,
-            Description: product.Description,
-            Title: product.Title,
-            Price: product.Price,
-            Type: product.Type,
-            Height: product.Height,
-            CreateDate: product.CreateDate,
-            Weight: product.Weight,
-            Rating: product.Rating,
-            Width: product.Width,
-            Length: product.Length
-
-        }*/
+        console.log(product);
+        console.log(url);
         return this.http.post(url, JSON.stringify(product), this.getRequestOptions())
             .map(res => res.json());
     }

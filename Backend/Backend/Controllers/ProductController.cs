@@ -15,7 +15,7 @@ namespace Backend.Controllers
   public class ProductController : Controller
   {
     private IProductRepository repository;
-    public JsonSerializerSettings settings
+    public JsonSerializerSettings Settings
     {
       get
       {
@@ -40,29 +40,40 @@ namespace Backend.Controllers
     {
       int num = n ?? 10;
       var res = repository.GetProducts(num);
-      return new JsonResult(res, settings);
+      return new JsonResult(res, Settings);
     }
 
     /// <summary>
-    /// GET: api/product/getproducts/{n}
+    /// GET: api/product/getmaterials
     /// ROUTING-TYPE: attribute-based
     /// </summary>
     /// <returns>An array of {n} Json-serialized objects</returns>
+    [HttpGet("GetProductMaterials")]
+    public JsonResult GetProductMaterials()
+    {
+      return new JsonResult(repository.GetProductMaterials(), Settings);
+    }
+
+    /// <summary>
+    /// GET: api/product/GetById/{id}
+    /// ROUTING-TYPE: attribute-based
+    /// </summary>
+    /// <returns>A serialized object taken by id</returns>
     [HttpGet("GetById/{id}")]
-    public JsonResult GetById(int id)
+    public JsonResult GetById(Guid id)
     {
-      return new JsonResult(repository.GetById(id), settings);
+      return new JsonResult(repository.GetById(id), Settings);
     }
 
     /// <summary>
-    /// GET: api/product/getproducts/{n}
+    /// GET: api/product/getproducttypes
     /// ROUTING-TYPE: attribute-based
     /// </summary>
-    /// <returns>An array of {n} Json-serialized objects</returns>
-    [HttpGet("GetTypes/{type}")]
-    public JsonResult GetTypes(string type)
+    /// <returns>An array of product types Json-serialized objects</returns>
+    [HttpGet("GetProductTypes")]
+    public JsonResult GetProductTypes(string type)
     {
-      return new JsonResult(repository.GetTypes(type), settings);
+      return new JsonResult(repository.GetProductTypes(), Settings);
     }
 
     /// <summary>
@@ -73,7 +84,7 @@ namespace Backend.Controllers
     public JsonResult Create([FromBody]Product product)
     {
       var res = repository.Create(product);
-      return new JsonResult(res == true ? new { success = true } : new { success = false }, settings);
+      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
     }
   }
 }

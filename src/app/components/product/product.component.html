@@ -1,5 +1,4 @@
 <div class="container" *ngIf='product'>
-    <p>{{product | json}}</p>
     <a class="btn btn-default" [routerLink]="['/product']">Back</a>
     <div class="page-header">
         <h1 class="text-center">{{product.Title}} <small *ngIf='product.Type' class="label label-default">{{product.Type}}</small></h1>
@@ -23,8 +22,8 @@
                     <td>{{product.Weight}}</td>
                 </tr>
                 <tr *ngIf='product.Length && product.Width && product.Height'>
-                    <td><b>Dimensions (m)</b></td>
-                    <td>{{product.Length}} &times; {{product.Weight}} &times; {{product.Height}}</td>
+                    <td><b>Dimensions (cm)</b></td>
+                    <td>{{product.Length}} &times; {{product.Height}} &times; {{product.Weight}}</td>
                 </tr>
             </table>
             <h2></h2>

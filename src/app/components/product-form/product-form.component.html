@@ -1,3 +1,45 @@
-<p>
-  product-form works!
-</p>
+<div class="jumbotron">
+  <h2>Create new product</h2>
+  <br>
+  <form novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+  <div class="form-group">
+    <label>Title *</label>
+    <input type="text" class="form-control" formControlName="title" placeholder="Insert title">
+  </div>
+  <div class="form-group">
+    <label>Price *</label>
+    <input type="number" class="form-control" formControlName="price" placeholder="Insert price">
+  </div>
+  <div class="form-group">
+    <label>Type</label>
+    <select class="form-control" formControlName="type">
+      <option *ngFor="let prodType of productTypes | async" value="{{prodType.Id}}">{{prodType.Title}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Material</label>
+    <select class="form-control" formControlName="material">
+      <option *ngFor="let prodMaterial of productMaterials | async" value="{{prodMaterial.Id}}">{{prodMaterial.Title}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Weight (kg)</label>
+    <input type="number" class="form-control" formControlName="weight" placeholder="Weight">
+  </div>
+  <div class="form-group">
+    <label>Width (cm)</label>
+    <input type="number" class="form-control" formControlName="width" placeholder="Insert width">
+    <label>Height (cm)</label>
+    <input type="number" class="form-control" formControlName="height" placeholder="Insert height">
+    <label>Length (cm)</label>
+    <input type="number" class="form-control" formControlName="length" placeholder="Insert length">
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" formControlName="description" placeholder="Insert description" rows="5"></textarea>
+  </div>
+
+    <input type="submit" class="form-control" [disabled]="!form.valid" class="btn btn-default" value="Create">
+  </form>
+</div>
