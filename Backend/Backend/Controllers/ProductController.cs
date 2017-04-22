@@ -35,11 +35,10 @@ namespace Backend.Controllers
     /// ROUTING-TYPE: attribute-based
     /// </summary>
     /// <returns>An array of {n} Json-serialized objects</returns>
-    [HttpGet("GetProducts/{n}")]
-    public JsonResult GetProducts(int? n)
+    [HttpGet("GetProductsList/{page}/{pageSize}")]
+    public JsonResult GetProductsList(int page, int pageSize)
     {
-      int num = n ?? 10;
-      var res = repository.GetProducts(num);
+      var res = repository.GetProductsList(page, pageSize);
       return new JsonResult(res, Settings);
     }
 

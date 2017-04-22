@@ -19,10 +19,6 @@ namespace OrderManagementSystem.Models.Repositories
       ProductMaterials = db.ProductMaterials;
       ProductTypes = db.ProductTypes;
     }
-    public IEnumerable<Product> GetProducts(int n)
-    {
-      return Products.Take(n).ToList();
-    }
 
     public Product GetById(Guid id)
     {
@@ -60,6 +56,27 @@ namespace OrderManagementSystem.Models.Repositories
     public IEnumerable<ProductType> GetProductTypes()
     {
       return ProductTypes.OrderBy(type => type.Title).ToList();
+    }
+    public ProductsList GetProductsList(int page, int pageSize)
+    {
+      var startIndex = (page - 1) * pageSize;
+      var totalItems = Products.Count();
+      ProductsList productsList = new ProductsList
+      {
+        Products = this.Products
+                    .OrderByDescending(product => product.CreateDate)
+                    .Skip(startIndex)
+                    .Take(pageSize),
+        PagingInfo = new PagingInfo
+        {
+          CurrentPage = page,
+          ItemsPerPage = pageSize,
+          TotalItems = totalItems,
+          StartIndex = startIndex,
+          EndIndex = Math.Min(startIndex + pageSize + 1, totalItems - 1)
+        }
+      };
+      return productsList;
     }
   }
 }

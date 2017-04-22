@@ -1,3 +1,4 @@
+import { TruncatePipe } from './pipes/truncate';
 import { ProductService } from './services/product.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,8 +18,8 @@ const routes: Routes = [
             { path: 'login', component: LoginComponent},
             { path: 'product',
                 children: [
-                    {path: '', redirectTo: 'list/10', pathMatch: 'full'},
-                    {path: 'list/:num', component: ProductListComponent},
+                    {path: '', redirectTo: 'list/1', pathMatch: 'full'},
+                    {path: 'list/:page', component: ProductListComponent},
                     {path: 'create', component: ProductFormComponent},
                     {path: ':id', component: ProductComponent}
                 ]
@@ -33,7 +34,8 @@ const routes: Routes = [
     ProductComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductListComponent
+    ProductListComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

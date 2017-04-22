@@ -6,7 +6,7 @@ namespace OrderManagementSystem.Models.Repositories
 {
   public interface IProductRepository
   {
-    IEnumerable<Product> GetProducts(int n);
+    ProductsList GetProductsList(int page, int pageSize);
     Product GetById(Guid id);
     bool Create(Product product);
     bool Remove(string id);
