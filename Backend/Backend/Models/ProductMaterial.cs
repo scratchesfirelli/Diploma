@@ -11,7 +11,7 @@ namespace Backend.Models
   public class ProductMaterial
   {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Title { get; set; }
     public virtual Product Product { get; set; }
   }

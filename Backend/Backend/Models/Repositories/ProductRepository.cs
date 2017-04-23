@@ -20,7 +20,7 @@ namespace OrderManagementSystem.Models.Repositories
       ProductTypes = db.ProductTypes;
     }
 
-    public Product GetById(Guid id)
+    public Product GetById(int id)
     {
       return Products.Where(prod => prod.Id == id).First();
     }

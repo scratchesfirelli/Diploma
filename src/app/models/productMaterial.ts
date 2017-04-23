@@ -1,4 +1,4 @@
 export class ProductMaterial {
-    Id?: String;
+    Id?: Number;
     Title: String;
 }

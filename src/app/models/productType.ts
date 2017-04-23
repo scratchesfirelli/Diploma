@@ -1,4 +1,4 @@
 export class ProductType{
-    Id?: String;
+    Id?: Number;
     TItle: String;
 }

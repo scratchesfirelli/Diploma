@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProductMaterial } from './../../models/productMaterial';
 import { ProductType } from './../../models/productType';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +18,7 @@ export class ProductFormComponent implements OnInit {
   productTypes: Observable<ProductType>;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) { }
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) { }
 
 
   ngOnInit() {
@@ -53,7 +54,7 @@ export class ProductFormComponent implements OnInit {
     };
     this.productService.addProduct(product).subscribe(data => {
       if(data.success) {
-        alert('OK');
+        this.router.navigate(['/product']);
       }
     });
   }

@@ -7,7 +7,7 @@ namespace OrderManagementSystem.Models.Repositories
   public interface IProductRepository
   {
     ProductsList GetProductsList(int page, int pageSize);
-    Product GetById(Guid id);
+    Product GetById(int id);
     bool Create(Product product);
     bool Remove(string id);
     bool Update(string id, Product product);

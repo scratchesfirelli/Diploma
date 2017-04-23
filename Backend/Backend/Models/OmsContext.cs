@@ -15,5 +15,11 @@ namespace OrderManagementSystem.Models
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductMaterial> ProductMaterials { get; set; }
     public DbSet<ProductType> ProductTypes { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.Entity<Product>().HasIndex(p => p.ProductMaterialId).IsUnique(false);
+      modelBuilder.Entity<Product>().HasIndex(p => p.ProductTypeId).IsUnique(false);
+    }
   }
 }

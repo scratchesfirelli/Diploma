@@ -2,38 +2,41 @@
     <a class="btn btn-default" [routerLink]="['/product/create']">Add</a>
     <div class="container" *ngIf='products'>
         <div class="row">
-            <h1 class="page-header">Products</h1>
+            <h1 class="page-header text-center">Products</h1>
             <div class="col-md-4" *ngFor='let product of products'>
                 <div class="thumbnail">
                     <img src="#" alt="..">
                     <div class="caption">
                         <h3>{{product.Title}}</h3>
-                        <p>{{product.Description | truncate : 20}}</p>
+                        <p>{{product.Description | truncate: 50}}</p>
                     </div>
-                    <a [routerLink]="['/product', product.Id]" class="btn btn-primary">View</a>
-                    <a href="#" class="btn btn-default" role="button">Buy</a>
+                    <a [routerLink]="['/product', product.Id]" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-eye-open"></span> View
+                    </a>
+                    <a href="#" class="btn btn-default">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+                    </a>
                 </div>
             </div>
         </div>
         <div class="container text-center">
             <ul *ngIf="pagingInfo.Pages && pagingInfo.Pages.length" class="pagination">
                 <li [ngClass]="{disabled: pagingInfo.CurrentPage === 1}">
-                    <a [routerLink]="['/product/list', '1']">First</a>
+                    <a [ngClass]="{disabled: pagingInfo.CurrentPage === 1}" [routerLink]="['/product/list', '1']">First</a>
                 </li>
                 <li [ngClass]="{disabled: pagingInfo.CurrentPage === 1}">
-                    <a [routerLink]="['/product/list', pagingInfo.CurrentPage - 1]">Previous</a>
+                    <a [ngClass]="{disabled: pagingInfo.CurrentPage === 1}" [routerLink]="['/product/list', pagingInfo.CurrentPage - 1]">Previous</a>
                 </li>
                 <li *ngFor="let page of pagingInfo.Pages" [ngClass]="{active:pagingInfo.CurrentPage === page}">
                     <a [routerLink]="['/product/list', page]">{{page}}</a>
                 </li>
-                <li [ngClass]="{disabled:pagingInfo.CurrentPage === pagingInfo.TotalPages}">
-                    <a [routerLink]="['/product/list', pagingInfo.CurrentPage + 1]">Next</a>
+                <li [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}">
+                    <a [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}" [routerLink]="['/product/list', pagingInfo.CurrentPage + 1]">Next</a>
                 </li>
-                <li [ngClass]="{disabled:pagingInfo.CurrentPage === pagingInfo.TotalPages}">
-                    <a [routerLink]="['/product/list', pagingInfo.TotalPages]">Last</a>
+                <li [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}">
+                    <a [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}" [routerLink]="['/product/list', pagingInfo.TotalPages]">Last</a>
                 </li>
             </ul>
         </div>
-
     </div>
 </div>

@@ -59,7 +59,7 @@ namespace Backend.Controllers
     /// </summary>
     /// <returns>A serialized object taken by id</returns>
     [HttpGet("GetById/{id}")]
-    public JsonResult GetById(Guid id)
+    public JsonResult GetById(int id)
     {
       return new JsonResult(repository.GetById(id), Settings);
     }

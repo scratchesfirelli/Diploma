@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-    pageSize: Number = 1;
+    pageSize: Number = 10;
     products: Product[];
     pagingInfo: PagingInfo;
     page: Number;
@@ -24,20 +24,12 @@ export class ProductListComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
             this.page = +params['page'];
-            this.productService.getProductsList(this.page, this.pageSize)
-            .subscribe(res => {
-                this.products = res.Products;
-                this.pagingInfo = res.PagingInfo;
-            });
+            this.getProducts();
         })
     }
 
-    onRouteChanged(path) {
-        console.log('in init');
-        let page = this.activatedRoute.snapshot.params['page'];
-        page = page ? page : 1;
-        console.log(page);
-        this.productService.getProductsList(page, this.pageSize)
+    getProducts() {
+        this.productService.getProductsList(this.page, +this.pageSize)
             .subscribe(res => {
                 this.products = res.Products;
                 this.pagingInfo = res.PagingInfo;

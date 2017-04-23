@@ -18,7 +18,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.ProductMaterial", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Title");
@@ -30,7 +30,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.ProductType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Title");
@@ -42,49 +42,47 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("OrderManagementSystem.Models.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateDate");
 
                     b.Property<string>("Description");
 
-                    b.Property<double>("Height");
+                    b.Property<double?>("Height");
 
-                    b.Property<double>("Length");
+                    b.Property<double?>("Length");
 
                     b.Property<decimal>("Price");
 
-                    b.Property<Guid>("ProductMaterialId");
+                    b.Property<int>("ProductMaterialId");
 
-                    b.Property<Guid>("ProductTypeId");
+                    b.Property<int>("ProductTypeId");
 
                     b.Property<string>("Title")
                         .IsRequired();
 
-                    b.Property<double>("Weight");
+                    b.Property<double?>("Weight");
 
-                    b.Property<double>("Width");
+                    b.Property<double?>("Width");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductMaterialId")
-                        .IsUnique();
+                    b.HasIndex("ProductMaterialId");
 
-                    b.HasIndex("ProductTypeId")
-                        .IsUnique();
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OrderManagementSystem.Models.Product", b =>
                 {
-                    b.HasOne("Backend.Models.ProductMaterial")
+                    b.HasOne("Backend.Models.ProductMaterial", "ProductMaterial")
                         .WithOne("Product")
                         .HasForeignKey("OrderManagementSystem.Models.Product", "ProductMaterialId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Backend.Models.ProductType")
+                    b.HasOne("Backend.Models.ProductType", "ProductType")
                         .WithOne("Product")
                         .HasForeignKey("OrderManagementSystem.Models.Product", "ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade);

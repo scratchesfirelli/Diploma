@@ -1,14 +1,14 @@
 use OrderManagementSystem
 go
 
-insert into ProductMaterials values(NEWID(), 'Chipboard');
-insert into ProductMaterials values(NEWID(), 'Fireboard');
-insert into ProductMaterials values(NEWID(), 'Plywood');
-insert into ProductMaterials values(NEWID(), 'Pine');
-insert into ProductMaterials values(NEWID(), 'Beech');
-insert into ProductMaterials values(NEWID(), 'Ash');
-insert into ProductMaterials values(NEWID(), 'Oak');
-insert into ProductMaterials values(NEWID(), 'Maple');
-insert into ProductMaterials values(NEWID(), 'Walnut');
-insert into ProductMaterials values(NEWID(), 'Cherry');
-insert into ProductMaterials values(NEWID(), 'Mahogany');
+insert into ProductMaterials values('Chipboard');
+insert into ProductMaterials values('Fireboard');
+insert into ProductMaterials values('Plywood');
+insert into ProductMaterials values('Pine');
+insert into ProductMaterials values('Beech');
+insert into ProductMaterials values('Ash');
+insert into ProductMaterials values('Oak');
+insert into ProductMaterials values('Maple');
+insert into ProductMaterials values('Walnut');
+insert into ProductMaterials values('Cherry');
+insert into ProductMaterials values('Mahogany');
