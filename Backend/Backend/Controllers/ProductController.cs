@@ -76,13 +76,25 @@ namespace Backend.Controllers
     }
 
     /// <summary>
+    /// POST: api/product/delete
+    /// </summary>
+    /// <returns>Deletes a product and returns deletion result</returns>
+    [HttpPost("RemoveProduct")]
+    public JsonResult RemoveProduct([FromBody]Product product)
+    {
+      var res = repository.Remove(product);
+      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
+    }
+
+    /// <summary>
     /// POST: api/product/create
     /// </summary>
     /// <returns>Creates a new product and returns creation result</returns>
-    [HttpPost("Create")]
-    public JsonResult Create([FromBody]Product product)
+    [HttpPost("SaveProduct")]
+    public JsonResult SaveProduct([FromBody]Product product)
     {
-      var res = repository.Create(product);
+      bool res = false;
+      res = product.Id == 0 ? repository.Create(product) : repository.Update(product);
       return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
     }
   }

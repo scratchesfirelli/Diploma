@@ -1,45 +1,77 @@
 <div class="jumbotron">
-  <h2>Create new product</h2>
+  <div class="row">
+    <a *ngIf='form.controls.id.value' class="btn btn-default" [routerLink]="['/product/view', form.controls.id.value]">Back</a>
+    <a *ngIf='!form.controls.id.value' class="btn btn-default" [routerLink]="['/product/list', 1]">Back</a>
+  </div>
   <br>
-  <form novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
-  <div class="form-group">
-    <label>Title *</label>
-    <input type="text" class="form-control" formControlName="title" placeholder="Insert title">
-  </div>
-  <div class="form-group">
-    <label>Price *</label>
-    <input type="number" class="form-control" formControlName="price" placeholder="Insert price">
-  </div>
-  <div class="form-group">
-    <label>Type</label>
-    <select class="form-control" formControlName="type">
-      <option *ngFor="let prodType of productTypes | async" value="{{prodType.Id}}">{{prodType.Title}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Material</label>
-    <select class="form-control" formControlName="material">
-      <option *ngFor="let prodMaterial of productMaterials | async" value="{{prodMaterial.Id}}">{{prodMaterial.Title}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Weight (kg)</label>
-    <input type="number" class="form-control" formControlName="weight" placeholder="Weight">
-  </div>
-  <div class="form-group">
-    <label>Width (cm)</label>
-    <input type="number" class="form-control" formControlName="width" placeholder="Insert width">
-    <label>Height (cm)</label>
-    <input type="number" class="form-control" formControlName="height" placeholder="Insert height">
-    <label>Length (cm)</label>
-    <input type="number" class="form-control" formControlName="length" placeholder="Insert length">
-  </div>
 
-  <div class="form-group">
-    <label>Description</label>
-    <textarea class="form-control" formControlName="description" placeholder="Insert description" rows="5"></textarea>
-  </div>
-
-    <input type="submit" class="form-control" [disabled]="!form.valid" class="btn btn-default" value="Create">
+  <form class="form-horizontal" novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+    <fieldset>
+      <legend><h3 class="page-header">{{title}}</h3></legend>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Title *</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" formControlName="title" placeholder="Insert title">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Price *</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="price" placeholder="Insert price">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Type</label>
+        <div class="col-lg-10">
+          <select class="form-control" formControlName="type">
+            <option *ngFor="let prodType of productTypes | async" value="{{prodType.Id}}">{{prodType.Title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Material</label>
+        <div class="col-lg-10">
+          <select class="form-control" formControlName="material">
+            <option *ngFor="let prodMaterial of productMaterials | async" value="{{prodMaterial.Id}}">{{prodMaterial.Title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Weight (kg)</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="weight" placeholder="Weight">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Width (cm)</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="width" placeholder="Insert width">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Height (cm)</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="height" placeholder="Insert height">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Length (cm)</label>
+        <div class="col-lg-10">
+          <input type="number" class="form-control" formControlName="length" placeholder="Insert length">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Description</label>
+        <div class="col-lg-10">
+          <textarea class="form-control" formControlName="description" placeholder="Insert description" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type="reset" class="btn btn-default">Reset</button>
+          <input type="submit" class="form-control" [disabled]="!form.valid" class="btn btn-default" value="Save">
+        </div>
+      </div>
+    </fieldset>
   </form>
 </div>

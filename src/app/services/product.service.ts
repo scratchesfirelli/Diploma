@@ -37,10 +37,14 @@ export class ProductService {
             .map(res => res.json());
     }
 
-    addProduct(product: Product) {
-        let url = this.baseUrl+`/create`;
-        console.log(product);
-        console.log(url);
+    removeProduct(product: Product) {
+        let url = this.baseUrl+`/removeProduct`;
+        return this.http.post(url, JSON.stringify(product), this.getRequestOptions())
+            .map(res => res.json());
+    }
+
+    saveProduct(product: Product) {
+        let url = this.baseUrl+`/saveProduct`;
         return this.http.post(url, JSON.stringify(product), this.getRequestOptions())
             .map(res => res.json());
     }

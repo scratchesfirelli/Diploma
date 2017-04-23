@@ -39,14 +39,32 @@ namespace OrderManagementSystem.Models.Repositories
       return true;
     }
 
-    public bool Remove(string id)
+    public bool Remove(Product product)
     {
-      throw new NotImplementedException();
+      try
+      {
+        Products.Remove(product);
+      }
+      catch
+      {
+        return false;
+      }
+      _db.SaveChanges();
+      return true;
     }
 
-    public bool Update(string id, Product product)
+    public bool Update(Product product)
     {
-      throw new NotImplementedException();
+      try
+      {
+        Products.Update(product);
+      }
+      catch
+      {
+        return false;
+      }
+      _db.SaveChanges();
+      return true;
     }
     public IEnumerable<ProductMaterial> GetProductMaterials()
     {

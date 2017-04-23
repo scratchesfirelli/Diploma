@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs/Observable';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from './../../models/product';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Modal } from "ng2-modal";
 
 @Component({
   selector: 'app-product',
@@ -11,13 +12,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
   product: Product;
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) { }
+  @ViewChild('myModal') myModal: Modal;
+
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-      const id = this.activatedRoute.snapshot.params['id'];
-      this.productService.getById(+id)
-          .subscribe(product => this.product = product);
-      console.log(this.product);
+    const id = this.activatedRoute.snapshot.params['id'];
+    this.productService.getById(+id)
+      .subscribe(product => this.product = product);
   }
 
+  removeProduct() {
+    this.productService.removeProduct(this.product)
+      .subscribe(data => {
+        this.myModal.close();
+        if(data.success) this.router.navigate(['product/list/1']);
+      });
+  }
 }

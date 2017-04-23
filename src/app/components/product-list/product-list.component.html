@@ -1,5 +1,5 @@
 <div class="container">
-    <a class="btn btn-default" [routerLink]="['/product/create']">Add</a>
+    <a class="btn btn-default" routerLink = '/product/add'>Add</a>
     <div class="container" *ngIf='products'>
         <div class="row">
             <h1 class="page-header text-center">Products</h1>
@@ -10,7 +10,7 @@
                         <h3>{{product.Title}}</h3>
                         <p>{{product.Description | truncate: 50}}</p>
                     </div>
-                    <a [routerLink]="['/product', product.Id]" class="btn btn-primary">
+                    <a [routerLink]="['/product/view', product.Id]" class="btn btn-primary">
                         <span class="glyphicon glyphicon-eye-open"></span> View
                     </a>
                     <a href="#" class="btn btn-default">

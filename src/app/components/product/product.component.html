@@ -1,5 +1,13 @@
 <div class="container" *ngIf='product'>
-    <a class="btn btn-default" [routerLink]="['/product']">Back</a>
+    <div class="row">
+        <a class="btn btn-default" [routerLink]="['/product']">Back</a>
+        <div class="pull-right">
+            <button type="button" class="btn btn-warning" data-toggle="modal" (click)="myModal.open()">
+                Delete
+            </button>
+            <a class="btn btn-default" [routerLink]="['/product/edit', product.Id]">Edit</a>
+        </div>
+    </div>
     <div class="page-header">
         <h1 class="text-center">{{product.Title}} <small *ngIf='product.Type' class="label label-default">{{product.Type}}</small></h1>
     </div>
@@ -29,5 +37,23 @@
             <h2></h2>
         </div>
     </div>
-    <h3 *ngIf='product.Description'>{{product.Description}}</h3>
+    <div *ngIf='product.Description'>
+        <h1>Descriptrion</h1>
+        <p>{{product.Description}}</p>
+    </div>
 </div>
+
+<modal #myModal>
+    <modal-header>
+        <h3>Are you sure that you want to delete this?</h3>
+    </modal-header>
+    <modal-content>
+        <div class="alert alert-dismissible alert-danger">
+            <strong>Note:</strong> This cannot be undone!
+        </div>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-danger" (click)="removeProduct()">Yes</button>
+        <button class="btn btn-default" (click)="myModal.close()">Cancel</button>
+    </modal-footer>
+</modal>

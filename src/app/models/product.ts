@@ -4,11 +4,12 @@ export class Product {
     Description?: String;
     CreateDate?: Date;
     Price: Number;
-    Rating?: Number;
     ProductTypeId: String;
     ProductMaterialId?: String;
     Weight?: Number;
     Width?: Number;
     Height?: Number;
     Length?: Number;
+    ProductType?: any;
+    ProductMaterial?: any;
 }
