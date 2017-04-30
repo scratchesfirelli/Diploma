@@ -1,0 +1,49 @@
+<div class="jumbotron">
+  <form class="form-horizontal" novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+    <fieldset>
+      <legend class="text-center">
+        <h3 class="page-header">Register</h3>
+      </legend>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" formControlName="email">
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+            <small *ngIf="email.hasError('required')">Email is required</small>
+            <small *ngIf="email.hasError('pattern')">Please, enter valid email</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+          <input type="password" class="form-control" formControlName="password">
+          <div *ngIf="password.invalid && password.touched" class="text-danger">
+            <small *ngIf="password.hasError('required')">Password is required</small>
+            <small *ngIf="password.hasError('maxlength')">Password is to long</small>
+            <small *ngIf="password.hasError('minlength')">Password is to short</small>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Confirm password</label>
+        <div class="col-lg-10">
+          <input type="password" class="form-control" formControlName="confirmPassword">
+          <div *ngIf="(confirmPassword.invalid || form.hasError('nomatch')) && confirmPassword.touched" class="text-danger">
+            <small *ngIf="confirmPassword.hasError('required')">Confirmation is required</small>
+            <div *ngIf="form.hasError('nomatch')">
+              <small>Passwords do not match</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <input type="submit" class="form-control center" [disabled]="!form.valid" class="btn btn-default" value="Register">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderManagementSystem.Models
 {
-  public class OmsContext : DbContext
+  public class OmsContext : IdentityDbContext<AspNetUser>
   {
     public OmsContext(DbContextOptions<OmsContext> options)
             : base(options)
@@ -18,8 +19,9 @@ namespace OrderManagementSystem.Models
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<Product>().HasIndex(p => p.ProductMaterialId).IsUnique(false);
-      modelBuilder.Entity<Product>().HasIndex(p => p.ProductTypeId).IsUnique(false);
+      base.OnModelCreating(modelBuilder);
+    //  modelBuilder.Entity<Product>().HasIndex(p => p.ProductMaterialId).IsUnique(false);
+    //  modelBuilder.Entity<Product>().HasIndex(p => p.ProductTypeId).IsUnique(false);
     }
   }
 }

@@ -129,3 +129,8 @@ D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Remo
 D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\System.Interactive.Async.dll
 D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.EntityFrameworkCore.Design.dll
 D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.EntityFrameworkCore.Relational.Design.dll
+D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.AspNetCore.Authentication.dll
+D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.AspNetCore.Authentication.Cookies.dll
+D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.AspNetCore.Identity.dll
+D:\_DIPLOMA\OrderManagementSystem\Backend\Backend\bin\Debug\net461\win7-x86\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

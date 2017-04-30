@@ -12,6 +12,8 @@ using OrderManagementSystem.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using OrderManagementSystem.Models;
+using Backend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Backend
 {
@@ -42,8 +44,17 @@ namespace Backend
             .AllowCredentials());
       });
 
-      var connection = @"Server=(local)\sqlexpress;Database=OrderManagementSystem;Trusted_Connection=True;";
-      services.AddDbContext<OmsContext>(options => options.UseSqlServer(connection));
+      services.AddDbContext<OmsContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+      services.AddIdentity<AspNetUser, IdentityRole>().AddEntityFrameworkStores<OmsContext>();
+      services.Configure<IdentityOptions>(options =>
+      {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+      });
 
       services.AddTransient<IProductRepository, ProductRepository>();
 
@@ -57,6 +68,7 @@ namespace Backend
       loggerFactory.AddDebug();
 
       app.UseCors("CorsPolicy");
+      app.UseIdentity();
 
       app.UseMvc();
     }
