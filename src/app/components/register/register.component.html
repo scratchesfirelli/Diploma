@@ -1,8 +1,11 @@
 <div class="jumbotron">
+  <div class="alert alert-dismissible alert-danger" *ngIf="registrationError">
+    <strong>Error:</strong> {{registrationError}}
+  </div>
   <form class="form-horizontal" novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
     <fieldset>
       <legend class="text-center">
-        <h3 class="page-header">Register</h3>
+        <h2 class="page-header">Register</h2>
       </legend>
       <div class="form-group">
         <label class="col-lg-2 control-label">Email</label>

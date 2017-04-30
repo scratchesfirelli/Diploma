@@ -45,7 +45,7 @@ namespace Backend.Controllers
     {
       AspNetUser user = new AspNetUser { Email = model.Email, UserName = model.Email };
       var res = await _userManager.CreateAsync(user, model.Password);
-      return new JsonResult(res.Succeeded == true ? new { success = "true" } : new { success = "false" }, Settings);
+      return new JsonResult(new { success = res.Succeeded, error = String.Join(",", res.Errors.Select(err => err.Description)) }, Settings);
     }
   }
 }

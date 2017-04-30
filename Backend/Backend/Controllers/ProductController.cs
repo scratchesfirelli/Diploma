@@ -83,7 +83,7 @@ namespace Backend.Controllers
     public JsonResult RemoveProduct([FromBody]Product product)
     {
       var res = repository.Remove(product);
-      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ namespace Backend.Controllers
     {
       bool res = false;
       res = product.Id == 0 ? repository.Create(product) : repository.Update(product);
-      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
     }
   }
 }
