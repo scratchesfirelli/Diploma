@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 # Migrations
-/Backend/Backend/Migrations/*.cs
+Backend/Backend/Migrations/*.cs
+Backend/.vs/Backend

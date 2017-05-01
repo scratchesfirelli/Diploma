@@ -1,3 +1,36 @@
-<p>
-  login works!
-</p>
+<div class="jumbotron">
+  <div class="alert alert-dismissible alert-danger" *ngIf="loginError">
+    <strong>Error:</strong> {{loginError}}
+  </div>
+  <form class="form-horizontal" novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+    <fieldset>
+      <legend class="text-center">
+        <h2 class="page-header">Log in</h2>
+      </legend>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" formControlName="email">
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+            <small *ngIf="email.hasError('required')">Email is required</small>
+            <small *ngIf="email.hasError('pattern')">Please, enter valid email</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+          <input type="password" class="form-control" formControlName="password">
+          <div *ngIf="password.invalid && password.touched" class="text-danger">
+            <small *ngIf="password.hasError('required')">Password is required</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <input type="submit" class="form-control center" [disabled]="!form.valid" class="btn btn-default" value="Login">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

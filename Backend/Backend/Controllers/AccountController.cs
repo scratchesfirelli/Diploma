@@ -41,11 +41,24 @@ namespace Backend.Controllers
     /// </summary>
     /// <returns>A result of creating a user</returns>
     [HttpPost("Register")]
-    public async Task<IActionResult> Register([FromBody]User model)
+    public async Task<JsonResult> Register([FromBody]User model)
     {
       AspNetUser user = new AspNetUser { Email = model.Email, UserName = model.Email };
       var res = await _userManager.CreateAsync(user, model.Password);
       return new JsonResult(new { success = res.Succeeded, error = String.Join(",", res.Errors.Select(err => err.Description)) }, Settings);
+    }
+
+    /// <summary>
+    /// POST: api/account/register
+    /// ROUTING-TYPE: attribute-based
+    /// </summary>
+    /// <returns>A result of creating a user</returns>
+    [HttpPost("Login")]
+    public async Task<JsonResult> Login([FromBody]User model)
+    {
+      AspNetUser user = new AspNetUser { Email = model.Email, UserName = model.Email };
+      var res = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+      return new JsonResult(new { success = res.Succeeded, error = res.Succeeded ? null : "Wrong login or (and) password" }, Settings);
     }
   }
 }
