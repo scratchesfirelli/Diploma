@@ -1,3 +1,5 @@
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
 import { TruncatePipe } from './pipes/truncate';
 import { ProductService } from './services/product.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,10 +15,14 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from './components/login/login.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'product',
     children: [
@@ -38,7 +44,9 @@ const routes: Routes = [
     LoginComponent,
     ProductFormComponent,
     ProductListComponent,
-    TruncatePipe
+    TruncatePipe,
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ModalModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

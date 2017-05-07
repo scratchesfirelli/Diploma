@@ -7,11 +7,13 @@ using Newtonsoft.Json;
 using OrderManagementSystem.Models.Repositories;
 using OrderManagementSystem.Models;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers
 {
   [EnableCors("CorsPolicy")]
   [Route("api/[controller]")]
+  [AllowAnonymous]
   public class ProductController : Controller
   {
     private IProductRepository repository;
@@ -83,7 +85,7 @@ namespace Backend.Controllers
     public JsonResult RemoveProduct([FromBody]Product product)
     {
       var res = repository.Remove(product);
-      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
     }
 
     /// <summary>
@@ -95,7 +97,7 @@ namespace Backend.Controllers
     {
       bool res = false;
       res = product.Id == 0 ? repository.Create(product) : repository.Update(product);
-      return new JsonResult(res == true ? new { success = "true" } : new { success = "false" }, Settings);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
     }
   }
 }

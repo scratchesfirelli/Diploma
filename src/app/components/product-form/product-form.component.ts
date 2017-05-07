@@ -65,7 +65,7 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  submitForm(form: any) {
+  submitForm(form: FormGroup) {
     const product: Product = {
       Id: this.form.value.id || 0,
       Title: this.form.value.title,
