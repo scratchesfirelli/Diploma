@@ -1,5 +1,6 @@
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { tokenNotExpired } from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
@@ -7,6 +8,10 @@ export class AuthService {
   token: any;
 
   constructor(private http: Http) { }
+
+  loggedIn() {
+    return tokenNotExpired();
+  }
 
   register(email: String, password: String) {
     const url = this.baseUrl + '/register';

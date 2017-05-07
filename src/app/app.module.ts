@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { TruncatePipe } from './pipes/truncate';
 import { ProductService } from './services/product.service';
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'product',
     children: [
@@ -55,7 +56,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ModalModule
   ],
-  providers: [ProductService, AuthService],
+  providers: [ProductService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

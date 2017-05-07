@@ -44,3 +44,36 @@ Thumbs.db
 # Migrations
 Backend/Backend/Migrations/*.cs
 Backend/.vs/Backend
+
+#Visual Studio Files
+Backend/Backend/[Oo]bj
+Backend/Backend/[Bb]in
+Backend/Backend/[Dd]ebug
+Backend/Backend/[Bb]uild/
+*.user
+*.suo
+*.exe
+*.pdb
+*.aps
+*_i.c
+*_p.c
+*.ncb
+*.tlb
+*.tlh
+*.[Cc]ache
+*.bak
+*.ncb
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+ipch/
+*.dbmdl
+*.csproj.user
+*.cache
+*.swp
+*.vspscc
+*.vssscc
+*.bak.*
+*.bak

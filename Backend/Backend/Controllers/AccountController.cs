@@ -90,7 +90,7 @@ namespace Backend.Controllers
                                                    signingCredentials: signingCredentials,
                                                    audience: "http://localhost:4200/",
                                                    issuer: "MyAuthIssuer",
-                                                   expires: DateTime.UtcNow.AddMinutes(30));
+                                                   expires: DateTime.UtcNow.AddDays(3));
         return new JsonResult(new { success = true, token = handler.WriteToken(token) }, Settings);
       }
       return new JsonResult(new { success = false, error = "Wrong login or (and) password" }, Settings);
