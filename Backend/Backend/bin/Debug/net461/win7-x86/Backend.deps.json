@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.6.1/win7-x86",
-    "signature": "4a1dad872a915c928c1b187ad6c5d7aded35720c"
+    "signature": "b2a76edf41b5c4fa19482a76f72e429764cea4a5"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,7 @@
         "dependencies": {
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.1",
           "Microsoft.AspNetCore.Mvc": "1.1.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
@@ -480,6 +481,16 @@
           "lib/net451/Microsoft.AspNetCore.Authentication.Cookies.dll": {}
         }
       },
+      "microsoft.aspnetcore.authentication.jwtbearer/1.1.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "1.1.1",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/net451/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        }
+      },
       "microsoft.aspnetcore.authorization/1.1.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "1.1.1",
@@ -1358,6 +1369,36 @@
           "lib/netstandard1.0/Microsoft.Extensions.WebEncoders.dll": {}
         }
       },
+      "microsoft.identitymodel.logging/1.1.2": {
+        "compile": {
+          "lib/net451/Microsoft.IdentityModel.Logging.dll": {}
+        }
+      },
+      "microsoft.identitymodel.protocols/2.1.2": {
+        "dependencies": {
+          "System.IdentityModel.Tokens.Jwt": "5.1.2"
+        },
+        "compile": {
+          "lib/net451/Microsoft.IdentityModel.Protocols.dll": {}
+        }
+      },
+      "microsoft.identitymodel.protocols.openidconnect/2.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols": "2.1.2"
+        },
+        "compile": {
+          "lib/net451/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {}
+        }
+      },
+      "microsoft.identitymodel.tokens/5.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Logging": "1.1.2",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/net451/Microsoft.IdentityModel.Tokens.dll": {}
+        }
+      },
       "microsoft.net.http.headers/1.1.1": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -1498,6 +1539,14 @@
       "system.globalization.calendars/4.3.0": {
         "compile": {
           "ref/net46/System.Globalization.Calendars.dll": {}
+        }
+      },
+      "system.identitymodel.tokens.jwt/5.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.1.2"
+        },
+        "compile": {
+          "lib/net451/System.IdentityModel.Tokens.Jwt.dll": {}
         }
       },
       "system.interactive.async/3.0.0": {
@@ -1647,6 +1696,7 @@
         "dependencies": {
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.1",
           "Microsoft.AspNetCore.Mvc": "1.1.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
@@ -1768,6 +1818,16 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNetCore.Authentication.Cookies.dll": {}
+        }
+      },
+      "microsoft.aspnetcore.authentication.jwtbearer/1.1.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "1.1.1",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
         }
       },
       "microsoft.aspnetcore.authorization/1.1.1": {
@@ -2646,6 +2706,36 @@
         },
         "runtime": {
           "lib/netstandard1.0/Microsoft.Extensions.WebEncoders.dll": {}
+        }
+      },
+      "microsoft.identitymodel.logging/1.1.2": {
+        "runtime": {
+          "lib/net451/Microsoft.IdentityModel.Logging.dll": {}
+        }
+      },
+      "microsoft.identitymodel.protocols/2.1.2": {
+        "dependencies": {
+          "System.IdentityModel.Tokens.Jwt": "5.1.2"
+        },
+        "runtime": {
+          "lib/net451/Microsoft.IdentityModel.Protocols.dll": {}
+        }
+      },
+      "microsoft.identitymodel.protocols.openidconnect/2.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols": "2.1.2"
+        },
+        "runtime": {
+          "lib/net451/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {}
+        }
+      },
+      "microsoft.identitymodel.tokens/5.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Logging": "1.1.2",
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "runtime": {
+          "lib/net451/Microsoft.IdentityModel.Tokens.dll": {}
         }
       },
       "microsoft.net.http.headers/1.1.1": {
@@ -2796,6 +2886,14 @@
       "system.globalization.calendars/4.3.0": {
         "runtime": {
           "lib/net46/System.Globalization.Calendars.dll": {}
+        }
+      },
+      "system.identitymodel.tokens.jwt/5.1.2": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.1.2"
+        },
+        "runtime": {
+          "lib/net451/System.IdentityModel.Tokens.Jwt.dll": {}
         }
       },
       "system.interactive.async/3.0.0": {
@@ -3042,6 +3140,13 @@
       "sha512": "sha512-AkIz1eTfXYT94xTvCR+pegV7QahwIwYUq5ln8k5z/2Q9n3WgIkBL8mP0W0tG2WkKxhSVFlEnrbmhBVVOtku9aw==",
       "path": "microsoft.aspnetcore.authentication.cookies/1.1.1",
       "hashPath": "microsoft.aspnetcore.authentication.cookies.1.1.1.nupkg.sha512"
+    },
+    "microsoft.aspnetcore.authentication.jwtbearer/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IHV4qsBA8Sym042rM7SpiMEaC+Pi/s5Iz+OyZ3w/hQZcaUZtAfmjlYgdBP7blE4EqYjHpz0iNuqdh0A4rf2sSA==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/1.1.1",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.1.1.1.nupkg.sha512"
     },
     "microsoft.aspnetcore.authorization/1.1.1": {
       "type": "package",
@@ -3610,6 +3715,34 @@
       "path": "microsoft.extensions.webencoders/1.1.1",
       "hashPath": "microsoft.extensions.webencoders.1.1.1.nupkg.sha512"
     },
+    "microsoft.identitymodel.logging/1.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QPMFfRVnRkCzGpEQz/YEPsbwUjAp5R1W2dpaXHlJJNA7fp9gV4m4TDKvvXhQnqdEL0a0luNrYFZrbz7NRI1rXQ==",
+      "path": "microsoft.identitymodel.logging/1.1.2",
+      "hashPath": "microsoft.identitymodel.logging.1.1.2.nupkg.sha512"
+    },
+    "microsoft.identitymodel.protocols/2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DYjTihC3VrzhXiv2cdoAxBx2RhFphad5BXfwmebdt3aNqrUpCOfsfYN7Ivequ05MiNBfgjBfWf8pd0+6S8jSCA==",
+      "path": "microsoft.identitymodel.protocols/2.1.2",
+      "hashPath": "microsoft.identitymodel.protocols.2.1.2.nupkg.sha512"
+    },
+    "microsoft.identitymodel.protocols.openidconnect/2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oiB2Of9DWmmrWUiAX1MEjybrdQ0EpJq0FbtpxGuytecVaMmfIu1xzVEKrzmqxCSp25Ct+gtLVtDsdgOsgYA0TQ==",
+      "path": "microsoft.identitymodel.protocols.openidconnect/2.1.2",
+      "hashPath": "microsoft.identitymodel.protocols.openidconnect.2.1.2.nupkg.sha512"
+    },
+    "microsoft.identitymodel.tokens/5.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-m7UP4iY/dWfVwDNNSVGvZV6r4PwflaK++sYQsTTGAMILYb5IJ4Z4rKJRCA0uKjo6jTcdWlQxyPsxoEVwjqPKqQ==",
+      "path": "microsoft.identitymodel.tokens/5.1.2",
+      "hashPath": "microsoft.identitymodel.tokens.5.1.2.nupkg.sha512"
+    },
     "microsoft.net.http.headers/1.1.1": {
       "type": "package",
       "serviceable": true,
@@ -3784,6 +3917,13 @@
       "sha512": "sha512-GUlBtdOWT4LTV3I+9/PJW+56AnnChTaOqqTLFtdmype/L500M2LIyXgmtd9X2P2VOkmJd5c67H5SaC2QcL1bFA==",
       "path": "system.globalization.calendars/4.3.0",
       "hashPath": "system.globalization.calendars.4.3.0.nupkg.sha512"
+    },
+    "system.identitymodel.tokens.jwt/5.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wneX9Rv1p8zXNQ8v3mzKPlja3dP0dQY0Ea/0KUtCtlyqB9WtYoEWxTidqgq5iBHGvG5p/yuFKfedgvt2y68HpA==",
+      "path": "system.identitymodel.tokens.jwt/5.1.2",
+      "hashPath": "system.identitymodel.tokens.jwt.5.1.2.nupkg.sha512"
     },
     "system.interactive.async/3.0.0": {
       "type": "package",

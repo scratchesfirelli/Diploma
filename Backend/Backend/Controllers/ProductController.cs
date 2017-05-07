@@ -7,11 +7,13 @@ using Newtonsoft.Json;
 using OrderManagementSystem.Models.Repositories;
 using OrderManagementSystem.Models;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers
 {
   [EnableCors("CorsPolicy")]
   [Route("api/[controller]")]
+  [AllowAnonymous]
   public class ProductController : Controller
   {
     private IProductRepository repository;

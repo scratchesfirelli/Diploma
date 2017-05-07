@@ -32,15 +32,12 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(form: FormGroup) {
-
     this.authService.logIn(this.form.value.email, this.form.value.password)
       .subscribe(result => {
-        if (result.success) {
-          console.log(result)
+        if (result) {
           this.router.navigate(['/product/list', 1]);
         } else {
-          console.log(result.error)
-          this.loginError = result.error;
+          this.loginError = "Username or password is incorrect";
         }
       })
   }

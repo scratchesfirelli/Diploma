@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using OrderManagementSystem.Models;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend
 {
@@ -38,7 +41,8 @@ namespace Backend
       services.AddCors(options =>
       {
         options.AddPolicy("CorsPolicy",
-            builder => builder.AllowAnyOrigin()
+            builder => builder
+            .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
@@ -57,6 +61,9 @@ namespace Backend
       });
 
       services.AddTransient<IProductRepository, ProductRepository>();
+      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+      services.AddAuthorization();
 
       services.AddMvc();
     }
@@ -70,7 +77,26 @@ namespace Backend
       app.UseCors("CorsPolicy");
       app.UseIdentity();
 
-      app.UseMvc();
+      var key = Encoding.UTF8.GetBytes("l40b492eabc2bb8ss02bec8fd5yu3182y74j29090fb3h55b7a0812he1081cf5a6uhl5ed1");
+
+      var options = new JwtBearerOptions
+      {
+        TokenValidationParameters =
+        {
+          ValidateIssuer=true,
+          ValidateAudience = true,
+          ValidIssuer = "MyAuthIssuer",
+          ValidAudience = "http://localhost:4200/",
+          IssuerSigningKey = new SymmetricSecurityKey(key),
+          ValidateIssuerSigningKey = true,
+          ValidateLifetime = true,
+          ClockSkew = TimeSpan.Zero
+        }
+      };
+
+      app.UseJwtBearerAuthentication(options);
+
+      app.UseMvc().UseMvcWithDefaultRoute();
     }
   }
 }
