@@ -7,7 +7,9 @@
 
   <form class="form-horizontal" novalidate [formGroup]="form" (ngSubmit)="submitForm(form.value)">
     <fieldset>
-      <legend><h3 class="page-header">{{title}}</h3></legend>
+      <legend>
+        <h2 class="page-header text-center">{{title}}</h2>
+      </legend>
       <div class="form-group">
         <label class="col-lg-2 control-label">Title *</label>
         <div class="col-lg-10">
@@ -21,18 +23,22 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Type</label>
+        <label class="col-lg-2 control-label">Type *</label>
         <div class="col-lg-10">
           <select class="form-control" formControlName="type">
-            <option *ngFor="let prodType of productTypes | async" value="{{prodType.Id}}">{{prodType.Title}}</option>
+            <option *ngFor="let prodType of productTypes | async" value="{{prodType.Id}}">
+                {{prodType.Title}}
+              </option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Material</label>
+        <label class="col-lg-2 control-label">Material *</label>
         <div class="col-lg-10">
           <select class="form-control" formControlName="material">
-            <option *ngFor="let prodMaterial of productMaterials | async" value="{{prodMaterial.Id}}">{{prodMaterial.Title}}</option>
+            <option *ngFor="let prodMaterial of productMaterials | async" value="{{prodMaterial.Id}}">
+                {{prodMaterial.Title}}
+              </option>
           </select>
         </div>
       </div>

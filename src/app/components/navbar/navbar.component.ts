@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  userName: String;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.authService.getProfile()
   }
 
   onLogoutClick() {

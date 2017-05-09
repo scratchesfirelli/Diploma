@@ -35,7 +35,7 @@ export class ProductFormComponent implements OnInit {
       description: '',
       price: ['', Validators.required],
       type: ['', Validators.required],
-      material: '',
+      material: ['', Validators.required],
       weight: '',
       width: '',
       height: '',

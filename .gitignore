@@ -46,10 +46,10 @@ Thumbs.db
 /Backend/.vs/Backend
 
 #Visual Studio Files
-/Backend/Backend/[Oo]bj
-/Backend/Backend/[Bb]in
-/Backend/Backend/[Dd]ebug
-/Backend/Backend/[Bb]uild/
+/Backend/Backend/bin/*
+/Backend/Backend/build/*
+/Backend/Backend/debug/*
+/Backend/Backend/obj/*
 *.user
 *.suo
 *.exe

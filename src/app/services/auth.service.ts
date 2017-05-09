@@ -1,3 +1,5 @@
+import { User } from './../models/user';
+import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from "angular2-jwt";
@@ -5,9 +7,14 @@ import { tokenNotExpired } from "angular2-jwt";
 @Injectable()
 export class AuthService {
   baseUrl = 'http://localhost:5000/api/account';
+  //baseUrl = 'http://localhost:50707/api/account';
   token: any;
 
   constructor(private http: Http) { }
+
+  isAdmin() {
+    return localStorage.getItem('role') == 'admin';
+  }
 
   loggedIn() {
     return tokenNotExpired();
@@ -23,7 +30,7 @@ export class AuthService {
       .map(result => result.json());
   }
 
-  getProfile() {
+  getProfile(): Observable<User> {
     this.loadToken();
     const url = this.baseUrl + '/getProfile';
     let requestOptions = this.getRequestOptions();
@@ -42,10 +49,12 @@ export class AuthService {
     return this.http.post(url, JSON.stringify(user), this.getRequestOptions())
       .map(result => {
         let token = result.json() && result.json().token;
+        let role = result.json() && result.json().role;
         if (token) {
           this.token = token;
           localStorage.setItem('user', JSON.stringify({ email: user.Email }));
           localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
           return true;
         } else {
           return false;

@@ -14,6 +14,8 @@ using System.Text;
 using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OrderManagementSystem.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +28,7 @@ namespace Backend.Controllers
   {
     private readonly UserManager<AspNetUser> _userManager;
     private readonly SignInManager<AspNetUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IHttpContextAccessor _context;
     public JsonSerializerSettings Settings
     {
@@ -37,10 +40,11 @@ namespace Backend.Controllers
         };
       }
     }
-    public AccountController(UserManager<AspNetUser> userManager, SignInManager<AspNetUser> signInManager, IHttpContextAccessor context)
+    public AccountController(UserManager<AspNetUser> userManager, SignInManager<AspNetUser> signInManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor context)
     {
       _userManager = userManager;
       _signInManager = signInManager;
+      _roleManager = roleManager;
       _context = context;
     }
 
@@ -52,7 +56,14 @@ namespace Backend.Controllers
     [AllowAnonymous, HttpPost("Register")]
     public async Task<JsonResult> Register([FromBody]User model)
     {
+      var customerRole = _roleManager.Roles.FirstOrDefault(x => x.Name == "customer");
+      if (customerRole == null)
+      {
+        customerRole = new IdentityRole { Name = "customer" };
+        await _roleManager.CreateAsync(customerRole);
+      }
       AspNetUser user = new AspNetUser { Email = model.Email, UserName = model.Email };
+      user.Roles.Add(new IdentityUserRole<string> { RoleId = customerRole.Id, UserId = user.Id });
       var res = await _userManager.CreateAsync(user, model.Password);
       return new JsonResult(new { success = res.Succeeded, error = String.Join(",", res.Errors.Select(err => err.Description)) }, Settings);
     }
@@ -63,10 +74,17 @@ namespace Backend.Controllers
     /// </summary>
     /// <returns>Returns user profile</returns>
     [Authorize, HttpGet("GetProfile")]
-    public JsonResult GetProfile()
+    public async Task<JsonResult> GetProfileAsync()
     {
-      var identity = _context.HttpContext.User.Identity.Name;
-      return new JsonResult(new { user = new { email = _context.HttpContext.User.Identity.Name } }, Settings);
+      var user = await _userManager.FindByEmailAsync(_context.HttpContext.User.Identity.Name);
+      var role = await _userManager.GetRolesAsync(user);
+      return new JsonResult(new User()
+      {
+        Username = user.UserName,
+        Email = user.Email,
+        Role = role.FirstOrDefault(),
+        PhoneNumber = user.PhoneNumber
+      }, Settings);
     }
 
     /// <summary>
@@ -77,9 +95,8 @@ namespace Backend.Controllers
     [AllowAnonymous, HttpPost("Login")]
     public async Task<JsonResult> Login([FromBody]User model)
     {
-      AspNetUser user = new AspNetUser { Email = model.Email, UserName = model.Email };
       var res = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-      if(res.Succeeded)
+      if (res.Succeeded)
       {
         var handler = new JwtSecurityTokenHandler();
         var sec = "l40b492eabc2bb8ss02bec8fd5yu3182y74j29090fb3h55b7a0812he1081cf5a6uhl5ed1";
@@ -91,7 +108,9 @@ namespace Backend.Controllers
                                                    audience: "http://localhost:4200/",
                                                    issuer: "MyAuthIssuer",
                                                    expires: DateTime.UtcNow.AddDays(3));
-        return new JsonResult(new { success = true, token = handler.WriteToken(token) }, Settings);
+        var role = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(model.Email));
+        var rolerole = role.FirstOrDefault();
+        return new JsonResult(new { success = true, token = handler.WriteToken(token), role = role.FirstOrDefault() }, Settings);
       }
       return new JsonResult(new { success = false, error = "Wrong login or (and) password" }, Settings);
     }

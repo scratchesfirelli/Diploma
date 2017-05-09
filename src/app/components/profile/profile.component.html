@@ -1,3 +1,9 @@
 <div *ngIf="user">
-  <h2 class="page-header">{{user.email}}</h2>
+  <h2 class="page-header text-center">{{user.Email}} <span class=""><small>{{user.Role}}</small></span></h2>
+  <div>
+    <h4>Name: {{user.UserName}}</h4>
+  </div>
+  <div>
+    <h4>Phone: {{user.PhoneNumber}}</h4>
+  </div>
 </div>

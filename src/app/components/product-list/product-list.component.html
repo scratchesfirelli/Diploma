@@ -1,5 +1,5 @@
 <div class="container">
-    <a class="btn btn-default" routerLink = '/product/add'>Add</a>
+    <a class="btn btn-default" *ngIf='authService.isAdmin()' routerLink = '/product/add'>Add</a>
     <div class="container" *ngIf='products'>
         <div class="row">
             <h1 class="page-header text-center">Products</h1>

@@ -20,8 +20,6 @@ namespace OrderManagementSystem.Models
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
-    //  modelBuilder.Entity<Product>().HasIndex(p => p.ProductMaterialId).IsUnique(false);
-    //  modelBuilder.Entity<Product>().HasIndex(p => p.ProductTypeId).IsUnique(false);
     }
   }
 }

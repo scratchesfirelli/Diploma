@@ -17,6 +17,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminGuard } from "app/guards/admin.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,8 +28,8 @@ const routes: Routes = [
     path: 'product',
     children: [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-      { path: 'add', component: ProductFormComponent },
-      { path: 'edit/:id', component: ProductFormComponent },
+      { path: 'add', component: ProductFormComponent, canActivate: [AdminGuard] },
+      { path: 'edit/:id', component: ProductFormComponent, canActivate: [AdminGuard] },
       { path: 'list/:page', component: ProductListComponent },
       { path: 'view/:id', component: ProductComponent }
     ]
@@ -56,7 +57,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ModalModule
   ],
-  providers: [ProductService, AuthService, AuthGuard],
+  providers: [ProductService, AuthService, AuthGuard, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ProductsList } from '../../models/productsList';
 import { PagingInfo } from '../../models/pagingInfo';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
     constructor(
         private productService: ProductService,
         private activatedRoute: ActivatedRoute,
-        private router: Router) { }
+        private router: Router,
+        private authService: AuthService) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
