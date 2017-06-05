@@ -42,14 +42,14 @@ testem.log
 Thumbs.db
 
 # Migrations
-/Backend/Backend/Migrations/*.cs
-/Backend/.vs/Backend
+Backend/Backend/Migrations/*.cs
+Backend/.vs/Backend
 
 #Visual Studio Files
-/Backend/Backend/bin/*
-/Backend/Backend/build/*
-/Backend/Backend/debug/*
-/Backend/Backend/obj/*
+Backend/Backend/bin/*
+Backend/Backend/build/*
+Backend/Backend/debug/*
+Backend/Backend/obj/*
 *.user
 *.suo
 *.exe

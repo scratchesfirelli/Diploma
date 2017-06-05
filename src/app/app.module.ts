@@ -1,3 +1,4 @@
+import { CartService } from './services/cart.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { TruncatePipe } from './pipes/truncate';
@@ -18,6 +19,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminGuard } from "app/guards/admin.guard";
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -34,6 +36,7 @@ const routes: Routes = [
       { path: 'view/:id', component: ProductComponent }
     ]
   },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -47,7 +50,8 @@ const routes: Routes = [
     ProductListComponent,
     TruncatePipe,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ModalModule
   ],
-  providers: [ProductService, AuthService, AuthGuard, AdminGuard],
+  providers: [ProductService, AuthService, AuthGuard, AdminGuard, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

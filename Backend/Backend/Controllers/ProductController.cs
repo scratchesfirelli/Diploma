@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OrderManagementSystem.Models.Repositories;
-using OrderManagementSystem.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
+using Backend.Models.Repositories;
+using Backend.Models;
 
 namespace Backend.Controllers
 {
@@ -23,7 +19,8 @@ namespace Backend.Controllers
       {
         return new JsonSerializerSettings()
         {
-          Formatting = Formatting.Indented
+          Formatting = Formatting.Indented,
+          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
       }
     }
@@ -63,7 +60,8 @@ namespace Backend.Controllers
     [HttpGet("GetById/{id}")]
     public JsonResult GetById(int id)
     {
-      return new JsonResult(repository.GetById(id), Settings);
+      var product = repository.GetById(id);
+      return new JsonResult(product, Settings);
     }
 
     /// <summary>
@@ -81,7 +79,7 @@ namespace Backend.Controllers
     /// POST: api/product/delete
     /// </summary>
     /// <returns>Deletes a product and returns deletion result</returns>
-    [HttpPost("RemoveProduct")]
+    [HttpPost("RemoveProduct"), Authorize(Roles = "admin")]
     public JsonResult RemoveProduct([FromBody]Product product)
     {
       var res = repository.Remove(product);
@@ -92,7 +90,7 @@ namespace Backend.Controllers
     /// POST: api/product/create
     /// </summary>
     /// <returns>Creates a new product and returns creation result</returns>
-    [HttpPost("SaveProduct")]
+    [HttpPost("SaveProduct"), Authorize(Roles = "admin")]
     public JsonResult SaveProduct([FromBody]Product product)
     {
       bool res = false;

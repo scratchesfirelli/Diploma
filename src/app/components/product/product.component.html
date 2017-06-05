@@ -1,15 +1,22 @@
 <div class="container" *ngIf='product'>
     <div class="row">
         <a class="btn btn-default" [routerLink]="['/product']">Back</a>
-        <div class="pull-right" *ngIf='authService.isAdmin()'>
+        <div class="pull-right" *ngIf='authService.isAdmin(); else customer'>
             <button type="button" class="btn btn-warning" data-toggle="modal" (click)="myModal.open()">
                 Delete
             </button>
             <a class="btn btn-default" [routerLink]="['/product/edit', product.Id]">Edit</a>
         </div>
+        <ng-template #customer>
+            <div class="pull-right">
+                <button class="btn btn-default" (click)="addToCart()">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+                </button>
+            </div>
+        </ng-template>
     </div>
     <div class="page-header">
-        <h1 class="text-center">{{product.Title}} <small *ngIf='product.Type' class="label label-default">{{product.Type}}</small></h1>
+        <h1 class="text-center">{{product.Title}} <small *ngIf='product.ProductTypeId' class="label label-default">{{product.ProductType.Title}}</small></h1>
     </div>
     <div class="container">
         <div class="col-md-6">
@@ -24,6 +31,10 @@
                 <tr>
                     <td><b>Date</b></td>
                     <td>{{product.CreateDate | date }}</td>
+                </tr>
+                <tr>
+                    <td><b>Material</b></td>
+                    <td>{{product.ProductMaterial.Title}}</td>
                 </tr>
                 <tr *ngIf='product.Weight'>
                     <td><b>Weight (kg) </b></td>

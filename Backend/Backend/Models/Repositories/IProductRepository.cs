@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OrderManagementSystem.Models.Repositories
+namespace Backend.Models.Repositories
 {
   public interface IProductRepository
   {

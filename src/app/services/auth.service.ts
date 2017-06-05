@@ -1,3 +1,4 @@
+import { CartService } from './cart.service';
 import { User } from './../models/user';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -6,11 +7,11 @@ import { tokenNotExpired } from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/account';
-  //baseUrl = 'http://localhost:50707/api/account';
+  private baseUrl = 'http://localhost:5000/api/account';
+  //private baseUrl = 'http://localhost:50707/api/account';
   token: any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private cartService: CartService) { }
 
   isAdmin() {
     return localStorage.getItem('role') == 'admin';
@@ -35,7 +36,6 @@ export class AuthService {
     const url = this.baseUrl + '/getProfile';
     let requestOptions = this.getRequestOptions();
     requestOptions.headers.append('Authorization', `Bearer ${this.token}`);
-    console.log(requestOptions);
     return this.http.get(url, requestOptions)
       .map(result => result.json());
   };
@@ -52,7 +52,7 @@ export class AuthService {
         let role = result.json() && result.json().role;
         if (token) {
           this.token = token;
-          localStorage.setItem('user', JSON.stringify({ email: user.Email }));
+          localStorage.setItem('email', email.toString());
           localStorage.setItem('token', token);
           localStorage.setItem('role', role);
           return true;
@@ -65,6 +65,7 @@ export class AuthService {
   logOut() {
     this.token = null;
     localStorage.clear();
+    this.cartService.clear();
   }
 
   loadToken() {

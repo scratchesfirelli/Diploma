@@ -1,3 +1,5 @@
+import { ProductMaterial } from './productMaterial';
+import { ProductType } from './productType';
 export class Product {
     Id?: Number;
     Title: String;
@@ -10,6 +12,6 @@ export class Product {
     Width?: Number;
     Height?: Number;
     Length?: Number;
-    ProductType?: any;
-    ProductMaterial?: any;
+    ProductType?: ProductType;
+    ProductMaterial?: ProductMaterial;
 }

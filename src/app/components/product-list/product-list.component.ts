@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { AuthService } from './../../services/auth.service';
 import { ProductsList } from '../../models/productsList';
 import { PagingInfo } from '../../models/pagingInfo';
@@ -21,13 +22,18 @@ export class ProductListComponent implements OnInit {
         private productService: ProductService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        private cartService: CartService) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
             this.page = +params['page'];
             this.getProducts();
         })
+    }
+
+    addToCart(item: Product) {
+        this.cartService.addToCart(item);
     }
 
     getProducts() {

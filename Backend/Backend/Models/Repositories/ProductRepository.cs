@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Backend.Models;
 
-namespace OrderManagementSystem.Models.Repositories
+namespace Backend.Models.Repositories
 {
   public class ProductRepository : IProductRepository
   {
@@ -22,7 +22,11 @@ namespace OrderManagementSystem.Models.Repositories
 
     public Product GetById(int id)
     {
-      return Products.Where(prod => prod.Id == id).First();
+      return Products
+        .Where(prod => prod.Id == id)
+        .Include(prod => prod.ProductType)
+        .Include(prod => prod.ProductMaterial)
+        .First();
     }
 
     public bool Create(Product product)

@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { AuthService } from './../../services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,12 +20,17 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private cartService: CartService) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.productService.getById(+id)
       .subscribe(product => this.product = product);
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product);
   }
 
   removeProduct() {

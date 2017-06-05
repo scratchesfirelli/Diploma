@@ -8,15 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using OrderManagementSystem.Models.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using OrderManagementSystem.Models;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Backend.Models.Repositories;
 
 namespace Backend
 {
@@ -50,7 +47,7 @@ namespace Backend
 
       services.AddDbContext<OmsContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-      services.AddIdentity<AspNetUser, IdentityRole>().AddEntityFrameworkStores<OmsContext>();
+      services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<OmsContext>();
       services.Configure<IdentityOptions>(options =>
       {
         options.Password.RequireDigit = false;

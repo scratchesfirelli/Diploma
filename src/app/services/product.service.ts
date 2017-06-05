@@ -11,6 +11,7 @@ import 'rxjs'
 @Injectable()
 export class ProductService {
     private baseUrl = 'http://localhost:5000/api/product';
+    //private baseUrl = 'http://localhost:50707/api/product';
     constructor(private http: Http) { }
 
     getProductsList(page: Number, pageSize: Number): Observable<ProductsList> {
