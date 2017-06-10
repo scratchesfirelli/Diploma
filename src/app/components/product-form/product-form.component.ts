@@ -47,7 +47,6 @@ export class ProductFormComponent implements OnInit {
 
     const id = this.activatedRoute.snapshot.params['id'];
     if (id) {
-      console.log(id);
       this.productService.getById(+id)
         .subscribe(product => {
           this.form.controls['id'].setValue(product.Id);

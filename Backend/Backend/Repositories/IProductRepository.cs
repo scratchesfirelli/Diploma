@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Backend.Models.Repositories
+namespace Backend.Repositories
 {
   public interface IProductRepository
   {

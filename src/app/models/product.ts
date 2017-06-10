@@ -5,13 +5,13 @@ export class Product {
     Title: String;
     Description?: String;
     CreateDate?: Date;
-    Price: Number;
+    Price: number;
     ProductTypeId: String;
     ProductMaterialId?: String;
     Weight?: Number;
     Width?: Number;
     Height?: Number;
     Length?: Number;
-    ProductType?: ProductType;
-    ProductMaterial?: ProductMaterial;
+    Type?: ProductType;
+    Material?: ProductMaterial;
 }

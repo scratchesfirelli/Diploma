@@ -1,3 +1,4 @@
+import { OrderProduct } from './../../models/orderProduct';
 import { Product } from './../../models/product';
 import { Observable } from 'rxjs/Observable';
 import { CartService } from './../../services/cart.service';
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   userName: String;
-  shoppingCartItems$: Observable<Product[]>;
+  shoppingCartItems$: Observable<OrderProduct[]>;
   cartTotalPrice: Number;
 
   constructor(

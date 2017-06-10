@@ -10,11 +10,10 @@ namespace Backend.Models
     [Key]
     public int Id { get; set; }
     public string UserId { get; set; }
-    [Required]
     public DateTime AddDate { get; set; }
     public DateTime CompleteDate { get; set; }
-
     [ForeignKey("UserId")]
     public virtual User User { get; set; }
+    public virtual IEnumerable<OrderProduct> OrderProducts { get; set; }
   }
 }

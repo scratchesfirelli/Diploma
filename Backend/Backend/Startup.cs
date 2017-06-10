@@ -13,7 +13,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Backend.Models.Repositories;
+using Backend.DbContext;
+using Backend.Repositories;
 
 namespace Backend
 {
@@ -47,6 +48,7 @@ namespace Backend
 
       services.AddDbContext<OmsContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
       services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<OmsContext>();
       services.Configure<IdentityOptions>(options =>
       {
@@ -58,6 +60,7 @@ namespace Backend
       });
 
       services.AddTransient<IProductRepository, ProductRepository>();
+      services.AddTransient<IOrderRepository, OrderRepository>();
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
       services.AddAuthorization();

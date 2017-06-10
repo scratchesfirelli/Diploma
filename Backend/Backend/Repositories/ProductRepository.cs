@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Backend.Models;
+using Backend.DbContext;
 
-namespace Backend.Models.Repositories
+namespace Backend.Repositories
 {
   public class ProductRepository : IProductRepository
   {
@@ -24,8 +25,8 @@ namespace Backend.Models.Repositories
     {
       return Products
         .Where(prod => prod.Id == id)
-        .Include(prod => prod.ProductType)
-        .Include(prod => prod.ProductMaterial)
+        .Include(prod => prod.Type)
+        .Include(prod => prod.Material)
         .First();
     }
 

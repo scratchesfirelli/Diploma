@@ -14,7 +14,7 @@
                     <a [routerLink]="['/product/view', product.Id]" class="btn btn-primary">
                         <span class="glyphicon glyphicon-eye-open"></span> View
                     </a>
-                    <button class="btn btn-default" (click)="addToCart(this.product)">
+                    <button class="btn btn-default" (click)="addToCart(this.product)" *ngIf='authService.loggedIn() && !authService.isAdmin()'>
                         <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
                     </button>
                 </div>

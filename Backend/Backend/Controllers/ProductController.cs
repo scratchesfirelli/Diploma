@@ -2,8 +2,8 @@
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
-using Backend.Models.Repositories;
 using Backend.Models;
+using Backend.Repositories;
 
 namespace Backend.Controllers
 {

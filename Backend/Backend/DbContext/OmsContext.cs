@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend.Models
+namespace Backend.DbContext
 {
   public class OmsContext : IdentityDbContext<User>
   {
     public OmsContext(DbContextOptions<OmsContext> options)
             : base(options)
-        { }
+        {  }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductMaterial> ProductMaterials { get; set; }
     public DbSet<ProductType> ProductTypes { get; set; }

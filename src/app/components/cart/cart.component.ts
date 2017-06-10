@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { OrderService } from './../../services/order.service';
+import { OrderProduct } from './../../models/orderProduct';
 import { Product } from './../../models/product';
 import { Observable } from 'rxjs/Observable';
 import { CartService } from './../../services/cart.service';
@@ -11,13 +14,34 @@ import { of } from "rxjs/observable/of";
 })
 export class CartComponent implements OnInit {
 
-  public cartItems: Observable<Product[]>;
+  public cartItemsOvservable: Observable<OrderProduct[]> = of([]);
+  public cartItems: OrderProduct[] = [];
 
-  constructor(private cartService: CartService) {
-    this.cartItems = this.cartService.getItems();
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router) {
+    this.cartItemsOvservable = this.cartService.getItems();
+    this.cartItemsOvservable.subscribe(products => this.cartItems = products);
   }
 
   ngOnInit() {
   }
 
+  removeOne(item: Product){
+    this.cartService.removeFromCart(item);
+  }
+
+  addOne(item: Product){
+    this.cartService.addToCart(item);
+  }
+
+  completeOrder() {
+    this.orderService.create(this.cartItems).subscribe(data => {
+      if (data.success) {
+        this.cartService.clear();
+        this.router.navigate(['/orders']);
+      }
+    });;
+  }
 }

@@ -1,3 +1,4 @@
+import { OrderService } from './services/order.service';
 import { CartService } from './services/cart.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
@@ -20,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminGuard } from "app/guards/admin.guard";
 import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,6 +39,7 @@ const routes: Routes = [
     ]
   },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -51,7 +54,8 @@ const routes: Routes = [
     TruncatePipe,
     RegisterComponent,
     ProfileComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ModalModule
   ],
-  providers: [ProductService, AuthService, AuthGuard, AdminGuard, CartService],
+  providers: [ProductService, AuthService, AuthGuard, AdminGuard, CartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

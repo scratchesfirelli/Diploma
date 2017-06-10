@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Models
 {
-  public class CustomUser
+  public class RegistrationUser
   {
     public string Email { get; set; }
     public string Password { get; set; }

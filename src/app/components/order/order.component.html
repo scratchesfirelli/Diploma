@@ -1,0 +1,34 @@
+<div class="container" *ngIf='this.orders; else noOrders'>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="col-md-3">Order date</th>
+        <th class="col-md-3">Complete date</th>
+        <th class="col-md-6 text-center">Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{order.AddDate | date:'medium'}}</td>
+        <td *ngIf="order.CompleteDate === order.AddDate">
+          IN PROGRESS
+        </td>
+        <td *ngIf="order.CompleteDate !== order.AddDate">
+          {{order.CompleteDate}}
+        </td>
+        <td>
+          <div>
+            <span *ngFor="let orderProduct of order.OrderProducts">
+              <a [routerLink]="['/product/view', orderProduct.Product.Id]">{{orderProduct.Product.Title}}</a>, {{orderProduct.Amount}}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noOrders>
+  <h1 class="page-header text-center">You haven't ordered anything yet</h1>
+</ng-template>

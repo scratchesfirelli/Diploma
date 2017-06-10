@@ -54,7 +54,7 @@ namespace Backend.Controllers
     /// </summary>
     /// <returns>A result of creating a user</returns>
     [AllowAnonymous, HttpPost("Register")]
-    public async Task<JsonResult> Register([FromBody]CustomUser model)
+    public async Task<JsonResult> Register([FromBody]RegistrationUser model)
     {
       
       var customerRole = _roleManager.Roles.FirstOrDefault(role => role.Name == "customer");
@@ -94,7 +94,7 @@ namespace Backend.Controllers
     {
       var user = await _userManager.FindByEmailAsync(_context.HttpContext.User.Identity.Name);
       var role = await _userManager.GetRolesAsync(user);
-      return new JsonResult(new CustomUser()
+      return new JsonResult(new RegistrationUser()
       {
         UserName = user.UserName,
         Email = user.Email,
@@ -108,7 +108,7 @@ namespace Backend.Controllers
     /// </summary>
     /// <returns>An error or token if success</returns>
     [AllowAnonymous, HttpPost("Login")]
-    public async Task<JsonResult> Login([FromBody]CustomUser model)
+    public async Task<JsonResult> Login([FromBody]RegistrationUser model)
     {
       var user = await _userManager.FindByEmailAsync(model.Email);
       if (user != null)

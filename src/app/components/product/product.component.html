@@ -8,7 +8,7 @@
             <a class="btn btn-default" [routerLink]="['/product/edit', product.Id]">Edit</a>
         </div>
         <ng-template #customer>
-            <div class="pull-right">
+            <div class="pull-right" *ngIf='authService.loggedIn()'>
                 <button class="btn btn-default" (click)="addToCart()">
                     <span class="glyphicon glyphicon-shopping-cart"></span> Buy
                 </button>
@@ -16,7 +16,7 @@
         </ng-template>
     </div>
     <div class="page-header">
-        <h1 class="text-center">{{product.Title}} <small *ngIf='product.ProductTypeId' class="label label-default">{{product.ProductType.Title}}</small></h1>
+        <h1 class="text-center">{{product.Title}} </h1>
     </div>
     <div class="container">
         <div class="col-md-6">
@@ -24,6 +24,10 @@
         </div>
         <div class="col-md-6">
             <table class="table">
+                <tr>
+                    <td><b>Type</b></td>
+                    <td>{{product.Type.Title}}</td>
+                </tr>
                 <tr>
                     <td><b>Price</b></td>
                     <td>{{product.Price | currency: 'USD':true:'1.2-2' }}</td>
@@ -34,7 +38,7 @@
                 </tr>
                 <tr>
                     <td><b>Material</b></td>
-                    <td>{{product.ProductMaterial.Title}}</td>
+                    <td>{{product.Material.Title}}</td>
                 </tr>
                 <tr *ngIf='product.Weight'>
                     <td><b>Weight (kg) </b></td>
