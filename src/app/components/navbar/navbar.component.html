@@ -15,12 +15,12 @@
             <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/product/list/1']">Products</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/orders']">Orders</a></li>
+            <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/order']">Orders</a></li>
             <li *ngIf="authService.loggedIn() && !authService.isAdmin()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/cart']"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{cartTotalPrice | currency:'USD':true:'1.2-2'}}</a></li>
             <li *ngIf="!authService.loggedIn()"[routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/login']">Login</a></li>
             <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/profile']">Profile</a></li>
             <li *ngIf="!authService.loggedIn()"[routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink] = "['/register']">Register</a></li>
-            <li *ngIf="authService.loggedIn()"><a (click)="onLogoutClick()">Logout</a></li>
+            <li *ngIf="authService.loggedIn()"><a [routerLink] = "['/login']" (click)="onLogoutClick()">Logout</a></li>
         </ul>
     </div>
     </div>

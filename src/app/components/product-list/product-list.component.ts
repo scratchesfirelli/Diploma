@@ -18,6 +18,9 @@ export class ProductListComponent implements OnInit {
     products: Product[];
     pagingInfo: PagingInfo;
     page: Number;
+    imgPath: String = "../../../../Backend/Backend/Media/";
+
+
     constructor(
         private productService: ProductService,
         private activatedRoute: ActivatedRoute,

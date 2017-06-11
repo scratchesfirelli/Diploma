@@ -14,6 +14,7 @@ import { Modal } from "ng2-modal";
 })
 export class ProductComponent implements OnInit {
   product: Product;
+  imgPath: String = "../../../../Backend/Backend/Media/";
   @ViewChild('myModal') myModal: Modal;
 
   constructor(

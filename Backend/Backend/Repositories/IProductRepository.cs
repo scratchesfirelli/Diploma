@@ -13,5 +13,7 @@ namespace Backend.Repositories
     bool Update(Product product);
     IEnumerable<ProductMaterial> GetProductMaterials();
     IEnumerable<ProductType> GetProductTypes();
+    bool SaveMaterial(ProductMaterial material);
+    bool SaveType(ProductType type);
   }
 }

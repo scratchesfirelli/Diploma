@@ -1,3 +1,4 @@
+import { OrdersList } from './../models/ordersList';
 import { AuthService } from './auth.service';
 import { OrderProduct } from './../models/orderProduct';
 import { Order } from './../models/order';
@@ -20,11 +21,19 @@ export class OrderService {
       .map(res => res.json());
   }
 
-  getOrders(): Observable<Order[]> {
-    let url = this.baseUrl+`/getOrders`;
+  getOrders(page: Number, pageSize: Number): Observable<OrdersList> {
+    let url = this.baseUrl+`/getOrders/${page}/${pageSize}`;
     let requestOptions = this.getRequestOptions();
     requestOptions.headers.append('Authorization', `Bearer ${this.authService.token}`);
     return this.http.get(url, requestOptions)
+      .map(res => res.json());
+  }
+
+  completeOrder(order: Order) {
+    let url = this.baseUrl+`/complete`;
+    let requestOptions = this.getRequestOptions();
+    requestOptions.headers.append('Authorization', `Bearer ${this.authService.token}`);
+    return this.http.post(url, JSON.stringify(order), requestOptions)
       .map(res => res.json());
   }
 

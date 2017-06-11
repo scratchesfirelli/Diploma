@@ -10,20 +10,14 @@ namespace Backend.Repositories
   public class ProductRepository : IProductRepository
   {
     private OmsContext _db { get; set; }
-    private DbSet<Product> Products { get; set; }
-    private DbSet<ProductMaterial> ProductMaterials { get; set; }
-    private DbSet<ProductType> ProductTypes { get; set; }
     public ProductRepository(OmsContext db)
     {
       _db = db;
-      Products = db.Products;
-      ProductMaterials = db.ProductMaterials;
-      ProductTypes = db.ProductTypes;
     }
 
     public Product GetById(int id)
     {
-      return Products
+      return _db.Products
         .Where(prod => prod.Id == id)
         .Include(prod => prod.Type)
         .Include(prod => prod.Material)
@@ -34,7 +28,7 @@ namespace Backend.Repositories
     {
       try
       {
-        Products.Add(product);
+        _db.Products.Add(product);
       }
       catch
       {
@@ -48,7 +42,7 @@ namespace Backend.Repositories
     {
       try
       {
-        Products.Remove(product);
+        _db.Products.Remove(product);
       }
       catch
       {
@@ -62,7 +56,7 @@ namespace Backend.Repositories
     {
       try
       {
-        Products.Update(product);
+        _db.Products.Update(product);
       }
       catch
       {
@@ -73,20 +67,20 @@ namespace Backend.Repositories
     }
     public IEnumerable<ProductMaterial> GetProductMaterials()
     {
-      return ProductMaterials.OrderBy(material => material.Title).ToList();
+      return _db.ProductMaterials.OrderBy(material => material.Title).ToList();
     }
 
     public IEnumerable<ProductType> GetProductTypes()
     {
-      return ProductTypes.OrderBy(type => type.Title).ToList();
+      return _db.ProductTypes.OrderBy(type => type.Title).ToList();
     }
     public ProductsList GetProductsList(int page, int pageSize)
     {
       var startIndex = (page - 1) * pageSize;
-      var totalItems = Products.Count();
+      var totalItems = _db.Products.Count();
       ProductsList productsList = new ProductsList
       {
-        Products = this.Products
+        Products = this._db.Products
                     .OrderByDescending(product => product.CreateDate)
                     .Skip(startIndex)
                     .Take(pageSize),
@@ -100,6 +94,34 @@ namespace Backend.Repositories
         }
       };
       return productsList;
+    }
+
+    public bool SaveMaterial(ProductMaterial material)
+    {
+      try
+      {
+        _db.ProductMaterials.Add(material);
+        _db.SaveChanges();
+        return true;
+      }
+      catch
+      {
+        return false;
+      }
+    }
+
+    public bool SaveType(ProductType type)
+    {
+      try
+      {
+        _db.ProductTypes.Add(type);
+        _db.SaveChanges();
+        return true;
+      }
+      catch
+      {
+        return false;
+      }
     }
   }
 }

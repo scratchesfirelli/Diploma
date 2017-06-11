@@ -3,11 +3,11 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class UserComponent implements OnInit {
   user: User;
   constructor(public authService: AuthService) { }
 

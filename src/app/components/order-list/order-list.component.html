@@ -1,0 +1,89 @@
+<div class="container" *ngIf='this.orders && this.orders.length != 0; else noOrders '>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Order date</th>
+        <th>Complete date</th>
+        <th *ngIf="authService.isAdmin()" class="col-md-2">User</th>
+        <th class="col-md-3 text-center">Products</th>
+        <th class="col-md-3 text-center">Total order price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index" (click)="pupulateModalWithOrder(order);">
+        <td *ngIf="!authService.isAdmin()">{{(i+1)+(pagingInfo.CurrentPage-1)*pageSize}}</td>
+        <td *ngIf="authService.isAdmin()">{{order.Id}}</td>
+        <td>{{order.AddDate | date:'medium'}}</td>
+        <td *ngIf="order.CompleteDate === order.AddDate">
+          IN PROGRESS
+        </td>
+        <td *ngIf="order.CompleteDate !== order.AddDate">
+          {{order.CompleteDate | date:'medium'}}
+        </td>
+        <td *ngIf="authService.isAdmin()">{{order.User.Email}}</td>
+        <td>
+          <div>
+            <div *ngFor="let orderProduct of order.OrderProducts">
+              <a [routerLink]="['/product/view', orderProduct.Product.Id]">{{orderProduct.Product.Title}}</a>: {{ orderProduct.Amount
+              }} {{ orderProduct.Amount == 1 ? "pc." : "pcs." }}, {{orderProduct.Product.Price | currency:'USD':true:'1.2-2'}}
+              each
+            </div>
+          </div>
+        </td>
+        <td class="text-center">
+          {{totalPriceOfOrder(order.OrderProducts) | currency:'USD':true:'1.2-2'}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container text-center">
+    <ul *ngIf="pagingInfo.Pages && pagingInfo.Pages.length" class="pagination">
+      <li [ngClass]="{disabled: pagingInfo.CurrentPage === 1}">
+        <a [ngClass]="{disabled: pagingInfo.CurrentPage === 1}" [routerLink]="['/order/list', '1']">First</a>
+      </li>
+      <li [ngClass]="{disabled: pagingInfo.CurrentPage === 1}">
+        <a [ngClass]="{disabled: pagingInfo.CurrentPage === 1}" [routerLink]="['/order/list', pagingInfo.CurrentPage - 1]">Previous</a>
+      </li>
+      <li *ngFor="let page of pagingInfo.Pages" [ngClass]="{active:pagingInfo.CurrentPage === page}">
+        <a [routerLink]="['/order/list', page]">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}">
+        <a [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}" [routerLink]="['/order/list', pagingInfo.CurrentPage + 1]">Next</a>
+      </li>
+      <li [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}">
+        <a [ngClass]="{disabled: pagingInfo.CurrentPage === pagingInfo.TotalPages}" [routerLink]="['/order/list', pagingInfo.TotalPages]">Last</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<ng-template #noOrders>
+  <h1 class="page-header text-center" *ngIf="!this.authService.isAdmin()">You haven't ordered anything yet</h1>
+  <h1 class="page-header text-center" *ngIf="this.authService.isAdmin()">No orders yet</h1>
+</ng-template>
+
+<modal #orderModal>
+  <modal-header>
+    <h3>Complete this order?</h3>
+  </modal-header>
+  <modal-content>
+    <div class="alert" *ngIf="order">
+      <div *ngFor="let orderProduct of order.OrderProducts">
+        <a [routerLink]="['/product/view', orderProduct.Product.Id]">{{orderProduct.Product.Title}}</a>: {{ orderProduct.Amount
+        }} {{ orderProduct.Amount == 1 ? "pc." : "pcs." }}, {{orderProduct.Product.Price | currency:'USD':true:'1.2-2'}}
+        each
+      </div>
+      <div>
+        <div class="pull-right">
+          <strong>Total: </strong> {{totalPriceOfOrder(order.OrderProducts) | currency:'USD':true:'1.2-2'}}
+        </div>
+      </div>
+    </div>
+  </modal-content>
+  <modal-footer>
+    <button class="btn btn" (click)="completeOrder()">Yes</button>
+    <button class="btn btn-default" (click)="orderStatusModal.close()">Cancel</button>
+  </modal-footer>
+</modal>

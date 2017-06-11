@@ -2,6 +2,10 @@
   <div class="row">
     <a *ngIf='form.controls.id.value' class="btn btn-default" [routerLink]="['/product/view', form.controls.id.value]">Back</a>
     <a *ngIf='!form.controls.id.value' class="btn btn-default" [routerLink]="['/product/list', 1]">Back</a>
+    <div class="pull-right">
+      <button class="btn btn-default" (click)="materialModal.open()">Add material</button>
+      <button class="btn btn-default" (click)="typeModal.open()">Add type</button>
+    </div>
   </div>
   <br>
 
@@ -73,6 +77,12 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="col-lg-2 control-label">Image *</label>
+        <div class="col-lg-10">
+          <input type="file" name="pic" accept="image/*" class="form-control" formControlName="image" (change)="fileEvent($event)"/>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
           <button type="reset" class="btn btn-default">Reset</button>
           <input type="submit" class="form-control" [disabled]="!form.valid" class="btn btn-default" value="Save">
@@ -81,3 +91,37 @@
     </fieldset>
   </form>
 </div>
+
+<modal #materialModal>
+  <modal-header>
+    <h3>Insert new material title</h3>
+  </modal-header>
+  <modal-content>
+    <div>
+      <form #formMaterial="ngForm" >
+        <input type="text" class="form-control" name="title" id="title" ngModel />
+      </form>
+    </div>
+  </modal-content>
+  <modal-footer>
+    <button class="btn" type="submit" (click)="addNewMaterial(formMaterial)">Add</button>
+    <button class="btn btn-default" (click)="materialModal.close()">Cancel</button>
+  </modal-footer>
+</modal>
+
+<modal #typeModal>
+  <modal-header>
+    <h3>Insert new type title</h3>
+  </modal-header>
+  <modal-content>
+    <div>
+      <form #formType="ngForm">
+        <input type="text" class="form-control" name="title" id="title" ngModel/>
+      </form>
+    </div>
+  </modal-content>
+  <modal-footer>
+    <button class="btn" type="submit" (click)="addNewType(formType)">Add</button>
+    <button class="btn btn-default" (click)="materialModal.close()">Cancel</button>
+  </modal-footer>
+</modal>

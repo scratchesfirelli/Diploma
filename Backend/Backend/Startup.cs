@@ -63,7 +63,11 @@ namespace Backend
       services.AddTransient<IOrderRepository, OrderRepository>();
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-      services.AddAuthorization();
+      services.AddAuthorization(options =>
+      {
+        options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
+        options.AddPolicy("Customer", policy => policy.RequireRole("customer"));
+      });
 
       services.AddMvc();
     }

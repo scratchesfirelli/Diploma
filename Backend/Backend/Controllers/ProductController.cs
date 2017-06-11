@@ -87,6 +87,28 @@ namespace Backend.Controllers
     }
 
     /// <summary>
+    /// POST: api/product/saveMaterial
+    /// </summary>
+    /// <returns>Saves product material</returns>
+    [HttpPost("SaveMaterial"), Authorize(Roles = "admin")]
+    public JsonResult SaveMaterial([FromBody]ProductMaterial material)
+    {
+      var res = repository.SaveMaterial(material);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
+    }
+
+    /// <summary>
+    /// POST: api/product/saveType
+    /// </summary>
+    /// <returns>Saves product type</returns>
+    [HttpPost("SaveType"), Authorize(Roles = "admin")]
+    public JsonResult SaveType([FromBody]ProductType type)
+    {
+      var res = repository.SaveType(type);
+      return new JsonResult(res == true ? new { success = true } : new { success = false }, Settings);
+    }
+
+    /// <summary>
     /// POST: api/product/create
     /// </summary>
     /// <returns>Creates a new product and returns creation result</returns>

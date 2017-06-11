@@ -39,13 +39,55 @@ namespace Backend.Repositories
       return true;
     }
 
-    public IEnumerable<Order> GetUsersOrders(User user)
+    public OrdersList GetOrders(User user, int page, int pageSize)
     {
-      return _db.Orders
-        .Where(order => order.User == user)
-        .Include(order => order.OrderProducts)
-        .ThenInclude(orderProduct => orderProduct.Product)
-        .OrderByDescending(order => order.AddDate);
+      IQueryable<Order> orders;
+      if(user != null)
+      {
+        orders = _db.Orders
+          .Where(order => order.User == user)
+          .Include(order => order.OrderProducts)
+          .ThenInclude(orderProduct => orderProduct.Product);
+      }
+      else
+      {
+        orders = _db.Orders
+          .Include(order => order.User)
+          .Include(order => order.OrderProducts)
+          .ThenInclude(orderProduct => orderProduct.Product);
+      }
+      var startIndex = (page - 1) * pageSize;
+      var totalItems = orders.Count();
+      OrdersList ordersList = new OrdersList
+      {
+        Orders = orders
+                    .OrderByDescending(order => order.AddDate)
+                    .Skip(startIndex)
+                    .Take(pageSize),
+        PagingInfo = new PagingInfo
+        {
+          CurrentPage = page,
+          ItemsPerPage = pageSize,
+          TotalItems = totalItems,
+          StartIndex = startIndex,
+          EndIndex = Math.Min(startIndex + pageSize + 1, totalItems - 1)
+        }
+      };
+      return ordersList;
+    }
+
+    public bool Complete(Order order)
+    {
+      try
+      {
+        _db.Entry<Order>(order).State = EntityState.Modified;
+        _db.SaveChanges();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        return false;
+      }
     }
   }
 }

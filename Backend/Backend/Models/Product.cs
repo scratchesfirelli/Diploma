@@ -1,6 +1,7 @@
 ﻿using Backend.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,8 +12,7 @@ namespace Backend.Models
     public Product() { }
     [Key]
     public int Id { get; set; }
-    [Required]
-    [MaxLength(75)]
+    [Required, MaxLength(75)]
     public string Title { get; set; }
     [Required, MaxLength(250)]
     public string Description { get; set; }
@@ -25,6 +25,8 @@ namespace Backend.Models
     public double? Length { get; set; }
     public int ProductMaterialId { get; set; }
     public int ProductTypeId { get; set; }
+    [MaxLength(75), DefaultValue("default.jpg")]
+    public string Image { get; set; }
     [ForeignKey("ProductMaterialId")]
     public virtual ProductMaterial Material { get; set; }
     [ForeignKey("ProductTypeId")]

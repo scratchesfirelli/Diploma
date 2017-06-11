@@ -14,18 +14,16 @@ import { of } from "rxjs/observable/of";
 })
 export class CartComponent implements OnInit {
 
-  public cartItemsOvservable: Observable<OrderProduct[]> = of([]);
-  public cartItems: OrderProduct[] = [];
+  public cartItemsObs: Observable<OrderProduct[]>;
 
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
     private router: Router) {
-    this.cartItemsOvservable = this.cartService.getItems();
-    this.cartItemsOvservable.subscribe(products => this.cartItems = products);
   }
 
   ngOnInit() {
+    this.cartItemsObs = this.cartService.getItems();
   }
 
   removeOne(item: Product){
@@ -36,11 +34,11 @@ export class CartComponent implements OnInit {
     this.cartService.addToCart(item);
   }
 
-  completeOrder() {
-    this.orderService.create(this.cartItems).subscribe(data => {
+  completeOrder(items: OrderProduct[]) {
+    this.orderService.create(items).subscribe(data => {
       if (data.success) {
         this.cartService.clear();
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/order']);
       }
     });;
   }

@@ -14,4 +14,5 @@ export class Product {
     Length?: Number;
     Type?: ProductType;
     Material?: ProductMaterial;
+    Image?: String;
 }

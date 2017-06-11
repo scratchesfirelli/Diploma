@@ -5,7 +5,8 @@ namespace Backend.Repositories
 {
   public interface IOrderRepository
   {
-    IEnumerable<Order> GetUsersOrders(User user);
+    OrdersList GetOrders(User user, int page, int pageSize);
+    bool Complete(Order order);
     bool Create(IEnumerable<OrderProduct> order, User user);
   }
 }

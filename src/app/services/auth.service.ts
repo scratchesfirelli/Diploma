@@ -3,7 +3,7 @@ import { User } from './../models/user';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from "angular2-jwt";
+import { tokenNotExpired, JwtHelper } from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: Http, private cartService: CartService) { }
 
   isAdmin() {
-    return localStorage.getItem('role') == 'admin';
+    return localStorage.getItem('role') === 'admin';
   }
 
   loggedIn() {

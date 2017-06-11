@@ -56,7 +56,6 @@ namespace Backend.Controllers
     [AllowAnonymous, HttpPost("Register")]
     public async Task<JsonResult> Register([FromBody]RegistrationUser model)
     {
-      
       var customerRole = _roleManager.Roles.FirstOrDefault(role => role.Name == "customer");
       var adminRole = _roleManager.Roles.FirstOrDefault(role => role.Name == "admin");
       if (customerRole == null)
@@ -93,14 +92,7 @@ namespace Backend.Controllers
     public async Task<JsonResult> GetProfileAsync()
     {
       var user = await _userManager.FindByEmailAsync(_context.HttpContext.User.Identity.Name);
-      var role = await _userManager.GetRolesAsync(user);
-      return new JsonResult(new RegistrationUser()
-      {
-        UserName = user.UserName,
-        Email = user.Email,
-        Role = role.First(),
-        PhoneNumber = user.PhoneNumber
-      }, Settings);
+      return new JsonResult(user, Settings);
     }
 
     /// <summary>

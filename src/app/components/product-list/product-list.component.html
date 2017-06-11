@@ -5,7 +5,7 @@
             <h1 class="page-header text-center">Products</h1>
             <div class="col-md-4" *ngFor='let product of products'>
                 <div class="thumbnail">
-                    <img src="#" alt="..">
+                    <img src="{{imgPath + product.Image}}" width="300" height="300" >
                     <div class="caption">
                         <h3>{{product.Title}}</h3>
                         <h3><small>{{product.Price | currency: 'USD':true:'1.2-2'}}</small></h3>

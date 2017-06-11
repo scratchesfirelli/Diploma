@@ -1,42 +1,45 @@
-<div class="container" *ngIf="cartItems.length != 0; else noProducts">
-  <div class="col-md-12">
-    <button class="btn pull-right" (click)="completeOrder()">
-    <span class="glyphicon glyphicon-ok"></span> COMPLETE ORDER
-  </button>
-  </div>
-  <div class="col-md-12">
-    <h1 class="page-header text-center">Your order</h1>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th class="col-md-5">Product</th>
-          <th class="col-md-1">Amount</th>
-          <th class="col-md-4 text-center">Total</th>
-          <th class="col-md-2 text-center">Options</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems; let i = index">
-          <td>{{i+1}}</td>
-          <td>{{item.Product.Title}}, {{item.Product.Price | currency:'USD':true:'1.2-2'}}</td>
-          <td>{{item.Amount}}</td>
-          <td class="text-center">{{item.Product.Price * item.Amount | currency:'USD':true:'1.2-2'}}</td>
-          <td class="text-center">
-            <button type="button" class="btn" (click)="addOne(item.Product)">
+<div *ngIf="cartItemsObs | async as cartItems else noProducts">
+  <div class="container" *ngIf="cartItems.length != 0; else noProducts">
+    <div class="col-md-12">
+      <button class="btn pull-right" (click)="completeOrder(cartItems)">
+        <span class="glyphicon glyphicon-ok"></span> COMPLETE ORDER
+      </button>
+    </div>
+    <div class="col-md-12">
+      <h1 class="page-header text-center">Your order</h1>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="col-md-5">Product</th>
+            <th class="col-md-1">Amount</th>
+            <th class="col-md-4 text-center">Total</th>
+            <th class="col-md-2 text-center">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.Product.Title}}, {{item.Product.Price | currency:'USD':true:'1.2-2'}}</td>
+            <td>{{item.Amount}}</td>
+            <td class="text-center">{{item.Product.Price * item.Amount | currency:'USD':true:'1.2-2'}}</td>
+            <td class="text-center">
+              <button type="button" class="btn" (click)="addOne(item.Product)">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
-            <button type="button" class="btn" (click)="removeOne(item.Product)">
+              <button type="button" class="btn" (click)="removeOne(item.Product)">
             <span class="glyphicon glyphicon-minus"></span>
           </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
+  </div>
 </div>
 
-<ng-template #noProducts>
-  <h1 class="page-header text-center">No items in cart</h1>
-</ng-template>
+
+  <ng-template #noProducts>
+    <h1 class="page-header text-center">No items in cart</h1>
+  </ng-template>

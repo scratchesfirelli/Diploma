@@ -1,3 +1,4 @@
+import { PagingInfo } from './pagingInfo';
 import { OrderProduct } from './orderProduct';
 import { User } from './user';
 export class Order {

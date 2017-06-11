@@ -26,6 +26,17 @@ export class ProductService {
             .map(res => res.json());
     }
 
+    addMaterial(productMaterial: ProductMaterial) {
+        let url = this.baseUrl+`/saveMaterial`;
+        return this.http.post(url, JSON.stringify(productMaterial), this.getRequestOptions())
+            .map(res => res.json());
+    }
+    addType(productType: ProductType) {
+        let url = this.baseUrl+`/saveType`;
+        return this.http.post(url, JSON.stringify(productType), this.getRequestOptions())
+            .map(res => res.json());
+    }
+
     getProductTypes(): Observable<ProductType> {
         let url = this.baseUrl+`/getProductTypes`;
         return this.http.get(url)
